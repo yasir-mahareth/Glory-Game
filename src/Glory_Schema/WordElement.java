@@ -10,13 +10,14 @@ package Glory_Schema;
  * 
  */
 public class WordElement extends GloryElement{
-    char[] letterContainer= new char[11];
+    private int wordLengthValue;
     
+    public WordElement( ){
+      wordLengthValue=getFinalWordLength()*5;
+        
+    }
     
-    public void splitWord(String word){
-        for(int i=0; i<getFinalWordLength(); i++){
-            letterContainer[i]=word.charAt(i);
-        }
+   public int getWordElementValue(){
+        return wordLengthValue;
     } 
-    
 }

@@ -10,13 +10,14 @@ package Glory_Schema;
  * 
  */
 public class PlayerElement extends GloryElement{
-    private final String playerName;
-    private final int playerID;
+    private  String playerName;
+    private int playerID;
+    private int totalPlayers;
     
-    public PlayerElement(String name,int id){
-        this.playerName=name;
-        this.playerID=id;
-    }
+   public PlayerElement(String name,int id){
+       this.playerName=name;
+       this.playerID=id;
+   }
 
     public String getPlayerName() {
         return playerName;
@@ -25,5 +26,7 @@ public class PlayerElement extends GloryElement{
     public int getPlayerID() {
         return playerID;
     }
-    
+    public int getTotalPlayers(){
+        return totalPlayers;
+    }
 }

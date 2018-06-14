@@ -15,19 +15,36 @@ public class FunctionElement extends GloryElement{
 
     ArrayList<LetterValueElement> valueList= new ArrayList<LetterValueElement>();
     char[] letterContainer= new char[11];
-    int rarenessScore=0;
     
-    public FunctionElement() {
-        
+    int rarenessScore=0;
+    int rewardScore=0;
+    int wordLengthScore=0;
+    
+    
+  
+    public void generateScore(){
         rarenessValueBank();
         splitWord(getFinalWord());
-        int score = getRarenessScore(getFinalWord());
-        System.out.println(score);
+        System.out.println(getFinalWord());
         
+    //Rareness Score
+        rarenessScore = getRarenessScore(getFinalWord());
+        System.out.println("Rareness score/ Scrabble value: "+rarenessScore);
+     
+    //Reward Score
+        RewardElement rewardObject= new RewardElement();
+        rewardScore= rewardObject.getRewardValue();
+        System.out.println("Reward Value: "+rewardScore);
+    
+    //Word Score
+        WordElement wordObject = new WordElement();
+        wordLengthScore= wordObject.getWordElementValue();
+        System.out.println("Word Length Score: "+wordLengthScore);
+    
+    //Final Score
+        setFinalScore(rarenessScore+rewardScore+wordLengthScore);
+        System.out.println("Final Score: "+getFinalScore()+"\n");
     }
-    
-    
-    
     
     
     

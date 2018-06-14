@@ -12,8 +12,17 @@ package Glory_Schema;
 public class RewardElement extends GloryElement{
     private int rewardValue;
     
-    public RewardElement(int value){
-        this.rewardValue=value;
+    
+    public RewardElement(){
+  
+        if(getFinalWordLength()==11){
+            
+            this.rewardValue=11*2;
+        }
+        else{
+            this.rewardValue=0;
+        }
+        
     }
     public void setRewardValue(int value){
         this.rewardValue=value;

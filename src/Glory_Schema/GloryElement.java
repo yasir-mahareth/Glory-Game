@@ -4,17 +4,27 @@
  * and open the template in the editor.
  */
 package Glory_Schema;
-import glory.game.*;
 /**
  *
  * 
  */
 public class GloryElement {
     
-    private String finalWord="oxygenizing";
-    private int finalWordLength=finalWord.length();
+    private static String finalWord;
+    private static int finalWordLength;
     private int finalScore=0;
 
+    
+    public void setFinalWord(String finalWord) {
+        this.finalWord = finalWord;
+    }
+
+    
+    public void setFinalWordLength() {
+        this.finalWordLength = getFinalWord().length();
+    }
+    
+    
     public String getFinalWord() {
         return finalWord;
     }
@@ -32,16 +42,7 @@ public class GloryElement {
     }
     
     
-    public boolean checkValiity(String word){
-        // insert code for checking validity with reference to a dictionary
-        boolean validity=true;
-                
-        if (validity==true && finalWordLength<=11){
-            return true;
-        }
-        else
-            return false;
-    }
+    
     
     
 }
