@@ -6,6 +6,7 @@
 package Glory_Schema;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -15,13 +16,15 @@ public class FunctionElement extends GloryElement{
 
     ArrayList<LetterValueElement> valueList= new ArrayList<LetterValueElement>();
     char[] letterContainer= new char[11];
-    
+    char vowelLetter;
+    char consonantLetter;
+       
     int rarenessScore=0;
     int rewardScore=0;
     int wordLengthScore=0;
     
     
-  
+// generate Score  
     public void generateScore(){
         rarenessValueBank();
         splitWord(getFinalWord());
@@ -64,42 +67,100 @@ public class FunctionElement extends GloryElement{
         return rarenessScore;
     }
     
-    
+//Split the world into letters   
     public void splitWord(String word){
         for(int i=0; i<getFinalWordLength(); i++){
             letterContainer[i]=word.charAt(i);
         }
     } 
     
-    public void rarenessValueBank(){
-   //     ArrayList<LetterValueElement> valueList= new ArrayList<LetterValueElement>();
+//generate a vowel    
+    public char generateVowel(){    
+        String type;
         
-        LetterValueElement a = new LetterValueElement('a',1);
-        LetterValueElement b = new LetterValueElement('b',3);
-        LetterValueElement c = new LetterValueElement('c',3);
-        LetterValueElement d = new LetterValueElement('d',2);
-        LetterValueElement e = new LetterValueElement('e',1);
-        LetterValueElement f = new LetterValueElement('f',4);
-        LetterValueElement g = new LetterValueElement('g',2);
-        LetterValueElement h = new LetterValueElement('h',4);
-        LetterValueElement i = new LetterValueElement('i',1);
-        LetterValueElement j = new LetterValueElement('j',8);
-        LetterValueElement k = new LetterValueElement('k',5);
-        LetterValueElement l = new LetterValueElement('l',1);
-        LetterValueElement m = new LetterValueElement('m',3);
-        LetterValueElement n = new LetterValueElement('n',1);
-        LetterValueElement o = new LetterValueElement('o',1);
-        LetterValueElement p = new LetterValueElement('p',3);
-        LetterValueElement q = new LetterValueElement('q',10);
-        LetterValueElement r = new LetterValueElement('r',1);
-        LetterValueElement s = new LetterValueElement('s',1);
-        LetterValueElement t = new LetterValueElement('t',1);
-        LetterValueElement u = new LetterValueElement('u',1);
-        LetterValueElement v = new LetterValueElement('v',4);
-        LetterValueElement w = new LetterValueElement('w',4);
-        LetterValueElement x = new LetterValueElement('x',8);
-        LetterValueElement y = new LetterValueElement('y',4);
-        LetterValueElement z = new LetterValueElement('z',10);
+        rarenessValueBank();
+        Random random = new Random();
+        int number= random.nextInt(26);
+        type=valueList.get(number).getType();
+        
+        if(type=="vowel"){
+            this.vowelLetter=valueList.get(number).getLetterName();
+        }
+        else{
+            while(type=="consonant"){
+                number= random.nextInt(26);
+                type=valueList.get(number).getType();
+
+                if(type=="vowel"){
+                this.vowelLetter=valueList.get(number).getLetterName();
+                type="vowel";
+                
+                }
+            }
+        }
+        
+      return vowelLetter;  
+        
+    }
+   
+//generate a consonant
+    public char generateConsonant(){
+        String type;
+        
+        rarenessValueBank();
+        Random random = new Random();
+        int number= random.nextInt(26);
+        type=valueList.get(number).getType();
+        
+        if(type=="consonant"){
+            this.consonantLetter=valueList.get(number).getLetterName();
+        }
+        else{
+            while(type=="vowel"){
+                number= random.nextInt(26);
+                type=valueList.get(number).getType();
+
+                if(type=="consonant"){
+                this.consonantLetter=valueList.get(number).getLetterName();
+                type="consonant";
+                
+                }
+            }
+        }
+        
+      return consonantLetter;  
+    }
+    
+// Rareness value bank    
+    public void rarenessValueBank(){
+   
+        
+        LetterValueElement a = new LetterValueElement('a',1,"vowel");
+        LetterValueElement b = new LetterValueElement('b',3,"consonant");
+        LetterValueElement c = new LetterValueElement('c',3,"consonant");
+        LetterValueElement d = new LetterValueElement('d',2,"consonant");
+        LetterValueElement e = new LetterValueElement('e',1,"vowel");
+        LetterValueElement f = new LetterValueElement('f',4,"consonant");
+        LetterValueElement g = new LetterValueElement('g',2,"consonant");
+        LetterValueElement h = new LetterValueElement('h',4,"consonant");
+        LetterValueElement i = new LetterValueElement('i',1,"vowel");
+        LetterValueElement j = new LetterValueElement('j',8,"consonant");
+        LetterValueElement k = new LetterValueElement('k',5,"consonant");
+        LetterValueElement l = new LetterValueElement('l',1,"consonant");
+        LetterValueElement m = new LetterValueElement('m',3,"consonant");
+        LetterValueElement n = new LetterValueElement('n',1,"consonant");
+        LetterValueElement o = new LetterValueElement('o',1,"vowel");
+        LetterValueElement p = new LetterValueElement('p',3,"consonant");
+        LetterValueElement q = new LetterValueElement('q',10,"consonant");
+        LetterValueElement r = new LetterValueElement('r',1,"consonant");
+        LetterValueElement s = new LetterValueElement('s',1,"consonant");
+        LetterValueElement t = new LetterValueElement('t',1,"consonant");
+        LetterValueElement u = new LetterValueElement('u',1,"vowel");
+        LetterValueElement v = new LetterValueElement('v',4,"consonant");
+        LetterValueElement w = new LetterValueElement('w',4,"consonant");
+        LetterValueElement x = new LetterValueElement('x',8,"consonant");
+        LetterValueElement y = new LetterValueElement('y',4,"consonant");
+        LetterValueElement z = new LetterValueElement('z',10,"consonant");
         
         valueList.add(0,a);
         valueList.add(1,b);

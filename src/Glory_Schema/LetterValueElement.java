@@ -13,10 +13,12 @@ public class LetterValueElement extends GloryElement{
     
     private char letterName;
     private int letterValue;
+    private String type;
     
-    public LetterValueElement(char name,int value){
+    public LetterValueElement(char name,int value, String type){
         this.letterValue=value;
         this.letterName=name;
+        this.type=type;
     }
     
     public void setLetterValue(int value){
@@ -30,4 +32,11 @@ public class LetterValueElement extends GloryElement{
     public int getLetterValue(){
         return letterValue;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    
+    
 }

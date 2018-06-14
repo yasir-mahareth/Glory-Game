@@ -156,49 +156,41 @@ public class MainFrame extends javax.swing.JFrame {
 
         p2Letter4.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
         p2Letter4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter4.setText("A");
         p2Letter4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelGame.add(p2Letter4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 460, 100, 90));
 
         p2Letter5.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
         p2Letter5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter5.setText("A");
         p2Letter5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelGame.add(p2Letter5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 460, 100, 90));
 
         p2Letter6.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
         p2Letter6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter6.setText("A");
         p2Letter6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelGame.add(p2Letter6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 460, 100, 90));
 
         p2Letter7.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
         p2Letter7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter7.setText("A");
         p2Letter7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelGame.add(p2Letter7, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 460, 100, 90));
 
         p2Letter8.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
         p2Letter8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter8.setText("A");
         p2Letter8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelGame.add(p2Letter8, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 460, 100, 90));
 
         p2Letter9.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
         p2Letter9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter9.setText("A");
         p2Letter9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelGame.add(p2Letter9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 460, 100, 90));
 
         p2Letter10.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
         p2Letter10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter10.setText("A");
         p2Letter10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelGame.add(p2Letter10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 460, 100, 90));
 
         p2Letter11.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
         p2Letter11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter11.setText("A");
         p2Letter11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelGame.add(p2Letter11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 460, 100, 90));
 
@@ -460,6 +452,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnP2_4V.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnP2_4V.setText("Vowel");
+        btnP2_4V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_4VActionPerformed(evt);
+            }
+        });
         panelGame.add(btnP2_4V, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 560, 100, 30));
 
         btnP2_4C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -473,6 +470,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnP2_5V.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnP2_5V.setText("Vowel");
+        btnP2_5V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_5VActionPerformed(evt);
+            }
+        });
         panelGame.add(btnP2_5V, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 560, 100, 30));
 
         btnP2_5C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -486,6 +488,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnP2_6V.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnP2_6V.setText("Vowel");
+        btnP2_6V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_6VActionPerformed(evt);
+            }
+        });
         panelGame.add(btnP2_6V, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 560, 100, 30));
 
         btnP2_6C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -499,6 +506,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnP2_7V.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnP2_7V.setText("Vowel");
+        btnP2_7V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_7VActionPerformed(evt);
+            }
+        });
         panelGame.add(btnP2_7V, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 560, 100, 30));
 
         btnP2_7C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -525,6 +537,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnP2_9V.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnP2_9V.setText("Vowel");
+        btnP2_9V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_9VActionPerformed(evt);
+            }
+        });
         panelGame.add(btnP2_9V, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 560, 100, 30));
 
         btnP2_9C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -538,6 +555,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnP2_10V.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnP2_10V.setText("Vowel");
+        btnP2_10V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_10VActionPerformed(evt);
+            }
+        });
         panelGame.add(btnP2_10V, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 560, 100, 30));
 
         btnP2_10C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -551,6 +573,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnP2_11V.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnP2_11V.setText("Vowel");
+        btnP2_11V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_11VActionPerformed(evt);
+            }
+        });
         panelGame.add(btnP2_11V, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 560, 100, 30));
 
         btnP2_11C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -652,6 +679,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnP2_8V1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnP2_8V1.setText("Vowel");
+        btnP2_8V1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_8V1ActionPerformed(evt);
+            }
+        });
         panelGame.add(btnP2_8V1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 560, 100, 30));
 
         btnSubmitP2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -693,7 +725,8 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnP2_8CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_8CActionPerformed
-        // TODO add your handling code here:
+        char consonant=functionObj.generateConsonant();
+        p2Letter8.setText(String.valueOf(consonant));
     }//GEN-LAST:event_btnP2_8CActionPerformed
 
     private void btnP1_4CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP1_4CActionPerformed
@@ -713,35 +746,42 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnP1_7CActionPerformed
 
     private void btnP2_4CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_4CActionPerformed
-        // TODO add your handling code here:
+        char consonant=functionObj.generateConsonant();
+        p2Letter4.setText(String.valueOf(consonant));
     }//GEN-LAST:event_btnP2_4CActionPerformed
 
     private void btnP2_5CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_5CActionPerformed
-        // TODO add your handling code here:
+        char consonant=functionObj.generateConsonant();
+        p2Letter5.setText(String.valueOf(consonant));
     }//GEN-LAST:event_btnP2_5CActionPerformed
 
     private void btnP2_6CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_6CActionPerformed
-        // TODO add your handling code here:
+        char consonant=functionObj.generateConsonant();
+        p2Letter6.setText(String.valueOf(consonant));
     }//GEN-LAST:event_btnP2_6CActionPerformed
 
     private void btnP2_7CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_7CActionPerformed
-        // TODO add your handling code here:
+        char consonant=functionObj.generateConsonant();
+        p2Letter7.setText(String.valueOf(consonant));
     }//GEN-LAST:event_btnP2_7CActionPerformed
 
     private void btnP1_8CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP1_8CActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnP1_8CActionPerformed
 
     private void btnP2_9CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_9CActionPerformed
-        // TODO add your handling code here:
+        char consonant=functionObj.generateConsonant();
+        p2Letter9.setText(String.valueOf(consonant));
     }//GEN-LAST:event_btnP2_9CActionPerformed
 
     private void btnP2_10CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_10CActionPerformed
-        // TODO add your handling code here:
+        char consonant=functionObj.generateConsonant();
+        p2Letter10.setText(String.valueOf(consonant));
     }//GEN-LAST:event_btnP2_10CActionPerformed
 
     private void btnP2_11CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_11CActionPerformed
-        // TODO add your handling code here:
+        char consonant=functionObj.generateConsonant();
+        p2Letter11.setText(String.valueOf(consonant));
     }//GEN-LAST:event_btnP2_11CActionPerformed
 
     private void btnP1_9CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP1_9CActionPerformed
@@ -783,7 +823,51 @@ public class MainFrame extends javax.swing.JFrame {
         functionObj.generateScore();
         
         
+        
+        
+        
+        
     }//GEN-LAST:event_btnSubmitP2ActionPerformed
+
+    private void btnP2_4VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_4VActionPerformed
+        char vowel=functionObj.generateVowel();
+        p2Letter4.setText(String.valueOf(vowel));
+    }//GEN-LAST:event_btnP2_4VActionPerformed
+
+    private void btnP2_5VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_5VActionPerformed
+        char vowel=functionObj.generateVowel();
+        p2Letter5.setText(String.valueOf(vowel));
+    }//GEN-LAST:event_btnP2_5VActionPerformed
+
+    private void btnP2_6VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_6VActionPerformed
+        char vowel=functionObj.generateVowel();
+        p2Letter6.setText(String.valueOf(vowel));
+    }//GEN-LAST:event_btnP2_6VActionPerformed
+
+    private void btnP2_7VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_7VActionPerformed
+        char vowel=functionObj.generateVowel();
+        p2Letter7.setText(String.valueOf(vowel));
+    }//GEN-LAST:event_btnP2_7VActionPerformed
+
+    private void btnP2_8V1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_8V1ActionPerformed
+        char vowel=functionObj.generateVowel();
+        p2Letter8.setText(String.valueOf(vowel));
+    }//GEN-LAST:event_btnP2_8V1ActionPerformed
+
+    private void btnP2_9VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_9VActionPerformed
+        char vowel=functionObj.generateVowel();
+        p2Letter9.setText(String.valueOf(vowel));
+    }//GEN-LAST:event_btnP2_9VActionPerformed
+
+    private void btnP2_10VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_10VActionPerformed
+        char vowel=functionObj.generateVowel();
+        p2Letter10.setText(String.valueOf(vowel));
+    }//GEN-LAST:event_btnP2_10VActionPerformed
+
+    private void btnP2_11VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_11VActionPerformed
+       char vowel=functionObj.generateVowel();
+        p2Letter11.setText(String.valueOf(vowel));
+    }//GEN-LAST:event_btnP2_11VActionPerformed
     
     public void generateFirst3Letters(){
         Random random = new Random();
