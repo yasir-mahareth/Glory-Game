@@ -5,10 +5,72 @@
  */
 package Glory_Schema;
 
+import glory.game.server.ScoreDetails;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.PrintWriter;
+import java.io.Serializable;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  *
  * 
  */
-public class ServerElement extends GloryElement{
+public class ServerElement {
+    private ArrayList<ScoreDetails> scoreContainerClient;
+    ObjectInputStream ois;
+    ScoreDetails unit1,unit2;
+    
+    public ServerElement(String playerName,int round, int rarenessScore, int rewardScore, int wordLengthScore, int finalScore){
+        
+        
+        try(Socket socket= new Socket("localhost",5000)){
+        
+    //input, output reader 
+            BufferedReader input= new BufferedReader(
+            new InputStreamReader(socket.getInputStream()));
+            
+            PrintWriter output = new PrintWriter(socket.getOutputStream(),true);
+                  
+            ois = new ObjectInputStream(socket.getInputStream());
+            
+                output.println(playerName);
+                output.println(round);
+                output.println(rarenessScore);
+                output.println(rewardScore);
+                output.println(wordLengthScore);
+                output.println(finalScore);
+            
+            scoreContainerClient = new ArrayList<ScoreDetails>();
+            
+            
+            try{
+                    scoreContainerClient.clear();
+                    scoreContainerClient =(ArrayList<ScoreDetails>) ois.readObject();
+                        
+                    for(int j=0;j<scoreContainerClient.size();j++){
+                        System.out.println(scoreContainerClient.get(j).getPlayerName()+" "+scoreContainerClient.get(j).getFinalScore());
+                    }
+                                              
+                }
+                catch (ClassNotFoundException e) {
+                    System.out.println("The scoreContainer data has not arrived from the server");
+                    e.printStackTrace();
+                }    
+                
+            
+           
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        
+    }
+    
     
 }

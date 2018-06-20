@@ -22,6 +22,7 @@ public class FunctionElement extends GloryElement{
     int rarenessScore=0;
     int rewardScore=0;
     int wordLengthScore=0;
+    int finalScore=0;
     
     
 // generate Score  
@@ -32,21 +33,23 @@ public class FunctionElement extends GloryElement{
         
     //Rareness Score
         rarenessScore = getRarenessScore(getFinalWord());
-        System.out.println("Rareness score/ Scrabble value: "+rarenessScore);
+    //    System.out.println("Rareness score/ Scrabble value: "+rarenessScore);
      
     //Reward Score
         RewardElement rewardObject= new RewardElement();
         rewardScore= rewardObject.getRewardValue();
-        System.out.println("Reward Value: "+rewardScore);
+      //  System.out.println("Reward Value: "+rewardScore);
     
     //Word Score
         WordElement wordObject = new WordElement();
         wordLengthScore= wordObject.getWordElementValue();
-        System.out.println("Word Length Score: "+wordLengthScore);
+      //  System.out.println("Word Length Score: "+wordLengthScore);
     
     //Final Score
+        
         setFinalScore(rarenessScore+rewardScore+wordLengthScore);
-        System.out.println("Final Score: "+getFinalScore()+"\n");
+        this.finalScore=getFinalScore();
+      //  System.out.println("Final Score: "+getFinalScore()+"\n");
     }
     
     
@@ -77,6 +80,7 @@ public class FunctionElement extends GloryElement{
 //generate a vowel    
     public char generateVowel(){    
         String type;
+        
         
         rarenessValueBank();
         Random random = new Random();

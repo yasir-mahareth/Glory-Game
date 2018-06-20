@@ -21,7 +21,8 @@ public class GloryGame {
       //  FunctionElement functionObj1 = new FunctionElement();
           MainFrame main =new MainFrame();
           main.setVisible(true);
-        
+          
+          
     
     }
     
