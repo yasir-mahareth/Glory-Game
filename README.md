@@ -1,2 +1,2 @@
 "Glory Game"
-Building up the online, multyplayer word game.  
+Building up the online, multiplayer word game.  
