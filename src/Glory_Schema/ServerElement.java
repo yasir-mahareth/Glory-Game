@@ -16,15 +16,24 @@ import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * 
  */
 public class ServerElement {
-    private ArrayList<ScoreDetails> scoreContainerClient;
+    static ArrayList<ScoreDetails> scoreContainerClient;
     ObjectInputStream ois;
-    ScoreDetails unit1,unit2;
+    BufferedReader input;
+    PrintWriter output;
+    
+    
+    Object[] row;
+    
+    public ServerElement(){
+        
+    }
     
     public ServerElement(String playerName,int round, int rarenessScore, int rewardScore, int wordLengthScore, int finalScore){
         
@@ -32,10 +41,10 @@ public class ServerElement {
         try(Socket socket= new Socket("localhost",5000)){
         
     //input, output reader 
-            BufferedReader input= new BufferedReader(
+            input= new BufferedReader(
             new InputStreamReader(socket.getInputStream()));
             
-            PrintWriter output = new PrintWriter(socket.getOutputStream(),true);
+            output = new PrintWriter(socket.getOutputStream(),true);
                   
             ois = new ObjectInputStream(socket.getInputStream());
             
@@ -52,17 +61,14 @@ public class ServerElement {
             try{
                     scoreContainerClient.clear();
                     scoreContainerClient =(ArrayList<ScoreDetails>) ois.readObject();
-                        
-                    for(int j=0;j<scoreContainerClient.size();j++){
-                        System.out.println(scoreContainerClient.get(j).getPlayerName()+" "+scoreContainerClient.get(j).getFinalScore());
-                    }
+                                           
                                               
-                }
-                catch (ClassNotFoundException e) {
+            }
+            catch (ClassNotFoundException e) {
                     System.out.println("The scoreContainer data has not arrived from the server");
                     e.printStackTrace();
-                }    
-                
+            }    
+             
             
            
         }
@@ -70,6 +76,10 @@ public class ServerElement {
             e.printStackTrace();
         }
         
+    }
+    
+    public ArrayList<ScoreDetails> getScoreContainer(){
+        return scoreContainerClient;
     }
     
     

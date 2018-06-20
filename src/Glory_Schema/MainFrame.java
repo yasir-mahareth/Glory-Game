@@ -5,6 +5,8 @@
  */
 package Glory_Schema;
 
+import glory.game.server.ScoreDetails;
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,6 +20,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -29,6 +33,7 @@ public class MainFrame extends javax.swing.JFrame {
     int round=1;
     String playerName;
     int playerCount=0;
+    DefaultTableModel model;
     
     public MainFrame() {
         initComponents();
@@ -140,6 +145,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnSubmitP2 = new javax.swing.JButton();
         lblScoreP3 = new javax.swing.JLabel();
         lblScoreP4 = new javax.swing.JLabel();
+        panelScoreCard = new javax.swing.JPanel();
+        btnNextRound = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableScoreCard = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -719,6 +729,49 @@ public class MainFrame extends javax.swing.JFrame {
 
         panelParent.add(panelGame, "card2");
 
+        panelScoreCard.setBackground(new java.awt.Color(44, 62, 80));
+        panelScoreCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnNextRound.setBackground(new java.awt.Color(236, 240, 241));
+        btnNextRound.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnNextRound.setForeground(new java.awt.Color(44, 62, 80));
+        btnNextRound.setText("Next Round");
+        btnNextRound.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextRoundActionPerformed(evt);
+            }
+        });
+        panelScoreCard.add(btnNextRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 650, 170, 40));
+
+        jLabel6.setBackground(new java.awt.Color(52, 73, 94));
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 48)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(236, 240, 241));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Glory Game");
+        jLabel6.setOpaque(true);
+        panelScoreCard.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 140));
+
+        tableScoreCard.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        tableScoreCard.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"hdvdv", null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Player Name", "Round", "Rareness Score", "Reward Score", "Word Element Score", "Final Score"
+            }
+        ));
+        tableScoreCard.setGridColor(new java.awt.Color(255, 255, 255));
+        tableScoreCard.setName("Score Card"); // NOI18N
+        tableScoreCard.setRowHeight(30);
+        tableScoreCard.setSelectionBackground(new java.awt.Color(44, 62, 80));
+        tableScoreCard.setSelectionForeground(new java.awt.Color(236, 240, 241));
+        jScrollPane1.setViewportView(tableScoreCard);
+
+        panelScoreCard.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 940, 360));
+
+        panelParent.add(panelScoreCard, "card5");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -787,10 +840,15 @@ public class MainFrame extends javax.swing.JFrame {
         wordObj.setFinalWordLength();
         functionObj = new FunctionElement();
         functionObj.generateScore();
+                
         
         ServerElement serverObj = new ServerElement(playerName,round, functionObj.rarenessScore, functionObj.rewardScore, functionObj.wordLengthScore, functionObj.finalScore);
         
-        round++;
+        panelParent.removeAll();
+        panelParent.add(panelScoreCard);
+        panelParent.repaint();
+        panelParent.revalidate();
+        fillScoreCard();
         
         
     }//GEN-LAST:event_btnSubmitP2ActionPerformed
@@ -859,6 +917,33 @@ public class MainFrame extends javax.swing.JFrame {
         
         round=1;
     }//GEN-LAST:event_btnPlayActionPerformed
+    
+    public void fillScoreCard(){
+        ArrayList<ScoreDetails> container = new ArrayList<ScoreDetails>() ;
+        
+        ServerElement obj = new ServerElement();
+        container=obj.getScoreContainer();
+        
+        model = (DefaultTableModel)tableScoreCard.getModel();
+        model.setRowCount(0);
+        
+        JTableHeader header = tableScoreCard.getTableHeader();
+        header.setFont(new Font ("Century Gothic",Font.PLAIN,18));
+        Object[] row = new Object[6];
+        
+        for(int j=0;j<container.size();j++){
+            
+            row[0]= container.get(j).getPlayerName();  
+            row[1]= String.valueOf(container.get(j).getRound());
+            row[2]= String.valueOf(container.get(j).getRarenessScore());
+            row[3]= String.valueOf(container.get(j).getRewardScore());
+            row[4]= String.valueOf(container.get(j).getWordLengthScore());
+            row[5]= String.valueOf(container.get(j).getFinalScore());
+            
+        model.addRow(row); 
+        }
+    }
+    
     
     public void sendFirst3Letters(char letter1,char letter2,char letter3){
         try(Socket socket= new Socket("localhost",5000)){
@@ -972,6 +1057,19 @@ public class MainFrame extends javax.swing.JFrame {
         txtPlayer1.setText(playerName);
         btnPlay.setEnabled(true);
     }//GEN-LAST:event_btnJoinActionPerformed
+
+    private void btnNextRoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextRoundActionPerformed
+         round++;
+         
+        panelParent.removeAll();
+        panelParent.add(panelGame);
+        panelParent.repaint();
+        panelParent.revalidate();
+        
+        generateFirst3Letters();
+        clearLetters();
+         
+    }//GEN-LAST:event_btnNextRoundActionPerformed
     
     public void generateFirst3Letters(){
         Random random = new Random();
@@ -988,6 +1086,17 @@ public class MainFrame extends javax.swing.JFrame {
         p2Letter1.setText(String.valueOf(letter1));
         p2Letter2.setText(String.valueOf(letter2));
         p2Letter3.setText(String.valueOf(letter3));
+    }
+    public void clearLetters(){
+        p2Letter4.setText("");
+        p2Letter5.setText("");
+        p2Letter6.setText("");
+        p2Letter7.setText("");
+        p2Letter8.setText("");
+        p2Letter9.setText("");
+        p2Letter10.setText("");
+        p2Letter11.setText("");
+        txtFinalWordP2.setText("");
     }
     
    
@@ -1030,6 +1139,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnHighScores;
     private javax.swing.JButton btnHowToPlay;
     private javax.swing.JButton btnJoin;
+    private javax.swing.JButton btnNextRound;
     private javax.swing.JButton btnP2_10C;
     private javax.swing.JButton btnP2_10V;
     private javax.swing.JButton btnP2_11C;
@@ -1053,6 +1163,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblScoreP1;
@@ -1109,7 +1221,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panelGame;
     private javax.swing.JPanel panelMain;
     private javax.swing.JPanel panelParent;
+    private javax.swing.JPanel panelScoreCard;
     private javax.swing.JPanel panelStart;
+    private javax.swing.JTable tableScoreCard;
     private javax.swing.JTextField txtFinalWordP2;
     private javax.swing.JLabel txtPlayer1;
     private javax.swing.JLabel txtPlayer2;
