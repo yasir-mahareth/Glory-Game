@@ -15,11 +15,12 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Scanner;
+//import java.util.Scanner;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * This class helps clients to send and retrieve Score details of connected clients 
+
  * 
  */
 public class ServerElement {
@@ -40,13 +41,14 @@ public class ServerElement {
         
         try(Socket socket= new Socket("localhost",5000)){
         
-    //input, output reader 
+            //input, output reader 
             input= new BufferedReader(
             new InputStreamReader(socket.getInputStream()));
             
             output = new PrintWriter(socket.getOutputStream(),true);
                   
             ois = new ObjectInputStream(socket.getInputStream());
+            output.println("score");
             
                 output.println(playerName);
                 output.println(round);

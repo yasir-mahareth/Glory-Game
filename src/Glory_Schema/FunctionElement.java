@@ -8,50 +8,87 @@ package Glory_Schema;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- *
- * 
- */
+
 public class FunctionElement extends GloryElement{
 
     ArrayList<LetterValueElement> valueList= new ArrayList<LetterValueElement>();
     char[] letterContainer= new char[11];
+    String[] lContainer= new String[11];
     char vowelLetter;
     char consonantLetter;
        
     int rarenessScore=0;
     int rewardScore=0;
     int wordLengthScore=0;
-    int finalScore=0;
-    
+    int RoundScore=0;
+    String key1,key2;
+    String validityDL;
     
 // generate Score  
-    public void generateScore(){
+    public void generateScore(String validityDictionary, String validityGivenWords){
         rarenessValueBank();
         splitWord(getFinalWord());
         System.out.println(getFinalWord());
         
-    //Rareness Score
-        rarenessScore = getRarenessScore(getFinalWord());
-    //    System.out.println("Rareness score/ Scrabble value: "+rarenessScore);
+        key1= validityDictionary;
+        key2=validityGivenWords;
+        
+        if(key1.equals("valid") && key2.equals("valid")){
+            rarenessScore = getRarenessScore(getFinalWord()); 
      
-    //Reward Score
-        RewardElement rewardObject= new RewardElement();
-        rewardScore= rewardObject.getRewardValue();
-      //  System.out.println("Reward Value: "+rewardScore);
+            RewardElement rewardObject= new RewardElement();
+            rewardScore= rewardObject.getRewardValue();    
     
-    //Word Score
-        WordElement wordObject = new WordElement();
-        wordLengthScore= wordObject.getWordElementValue();
-      //  System.out.println("Word Length Score: "+wordLengthScore);
+            WordElement wordObject = new WordElement();
+            wordLengthScore= wordObject.getWordElementValue();
+        }
+        else{
+            rarenessScore=0;
+            rewardScore=0;
+            wordLengthScore=0;
+        }
     
     //Final Score
         
-        setFinalScore(rarenessScore+rewardScore+wordLengthScore);
-        this.finalScore=getFinalScore();
+        setRoundScore(rarenessScore+rewardScore+wordLengthScore);
+        this.RoundScore=getRoundScore();
       //  System.out.println("Final Score: "+getFinalScore()+"\n");
     }
     
+    
+    public String checkValidityWithDisplayedLetters(ArrayList<String> arrayList){
+
+        ArrayList<String> wordLetters= new ArrayList<String>();
+        wordLetters.clear();
+    //   displayedLetters=arrayList;
+        
+        for(int i=0; i<getFinalWordLength(); i++){
+            wordLetters.add(i,String.valueOf(getFinalWord().charAt(i)));
+        }
+        
+        for(int i=0; i<wordLetters.size(); i++){
+            String letter =wordLetters.get(i);
+            this.validityDL= "invalid";
+            
+            for(int j=0;j<arrayList.size();j++){
+                
+                if(letter.equals(arrayList.get(j))){
+                    
+                    this.validityDL= "valid";
+                    
+                    arrayList.remove(j);
+                    break;
+                }
+            }
+            if(validityDL=="invalid"){
+                
+                break;
+            }
+            
+        }
+        System.out.println(validityDL+" with given letters");
+        return validityDL;
+    }
     
     
     public int getRarenessScore(String word){

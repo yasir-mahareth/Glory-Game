@@ -12,7 +12,7 @@ public class GloryElement {
     
     private static String finalWord;
     private static int finalWordLength;
-    private int finalScore=0;
+    private int RoundScore=0;
 
     
     public void setFinalWord(String finalWord) {
@@ -33,12 +33,12 @@ public class GloryElement {
         return finalWordLength;
     }
 
-    public int getFinalScore() {
-        return finalScore;
+    public int getRoundScore() {
+        return RoundScore;
     }
 
-    public void setFinalScore(int finalScore) {
-        this.finalScore = finalScore;
+    public void setRoundScore(int finalScore) {
+        this.RoundScore = finalScore;
     }
     
     

@@ -5,35 +5,38 @@
  */
 package Glory_Schema;
 
+
+import glory.game.server.InitialLetterDetails;
 import glory.game.server.ScoreDetails;
+import java.awt.Color;
 import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-/**
- *
- * @author Yaas
- */
+
 public class MainFrame extends javax.swing.JFrame {
 
     FunctionElement functionObj;
     int round=1;
     String playerName;
     int playerCount=0;
+    int VCCount4,VCCount5,VCCount6,VCCount7,VCCount8,VCCount9,VCCount10,VCCount11=0;
+    int finalScoreP1=0,finalScoreP2=0;
+    
     DefaultTableModel model;
+    String p2InitialLetters;
+    String p1InitialLetters;
+    ArrayList<String> allLetters;
+    
     
     public MainFrame() {
         initComponents();
@@ -44,7 +47,7 @@ public class MainFrame extends javax.swing.JFrame {
         panelParent.repaint();
         panelParent.revalidate();
         
-        generateFirst3Letters();
+        
         
     }
 
@@ -62,6 +65,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnPlayNow = new javax.swing.JButton();
         btnHowToPlay = new javax.swing.JButton();
         btnHighScores = new javax.swing.JButton();
+        lblVision = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         panelStart = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -74,8 +78,23 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtPlayersConnected = new javax.swing.JLabel();
         txtPlayer1 = new javax.swing.JLabel();
+        txtInfo = new javax.swing.JLabel();
+        lblRound3 = new javax.swing.JLabel();
+        lblRound4 = new javax.swing.JLabel();
+        panelScoreCard = new javax.swing.JPanel();
+        btnNextRound = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableScoreCard = new javax.swing.JTable();
+        btnExitGame = new javax.swing.JButton();
+        lblScorecardRound = new javax.swing.JLabel();
+        lblScorecardRound1 = new javax.swing.JLabel();
+        ScorecardPlayer2Score = new javax.swing.JLabel();
+        ScorecardPlayer1Score = new javax.swing.JLabel();
+        ScorecardPlayer2Score1 = new javax.swing.JLabel();
+        ScorecardPlayer2Score3 = new javax.swing.JLabel();
+        ScorecardPlayer2Score4 = new javax.swing.JLabel();
         panelGame = new javax.swing.JPanel();
-        jSeparator1 = new javax.swing.JSeparator();
         p2Letter1 = new javax.swing.JLabel();
         p2Letter2 = new javax.swing.JLabel();
         p2Letter3 = new javax.swing.JLabel();
@@ -87,7 +106,7 @@ public class MainFrame extends javax.swing.JFrame {
         p2Letter9 = new javax.swing.JLabel();
         p2Letter10 = new javax.swing.JLabel();
         p2Letter11 = new javax.swing.JLabel();
-        p1Letter1 = new javax.swing.JLabel();
+        p2PlayerName = new javax.swing.JLabel();
         p1Letter2 = new javax.swing.JLabel();
         p1Letter3 = new javax.swing.JLabel();
         p1Letter4 = new javax.swing.JLabel();
@@ -98,28 +117,7 @@ public class MainFrame extends javax.swing.JFrame {
         p1Letter9 = new javax.swing.JLabel();
         p1Letter10 = new javax.swing.JLabel();
         p1Letter11 = new javax.swing.JLabel();
-        p1Letter12 = new javax.swing.JLabel();
-        p1Letter13 = new javax.swing.JLabel();
-        p1Letter14 = new javax.swing.JLabel();
-        p1Letter15 = new javax.swing.JLabel();
-        p1Letter16 = new javax.swing.JLabel();
-        p1Letter17 = new javax.swing.JLabel();
-        p1Letter18 = new javax.swing.JLabel();
-        p1Letter19 = new javax.swing.JLabel();
-        p1Letter20 = new javax.swing.JLabel();
-        p1Letter21 = new javax.swing.JLabel();
-        p1Letter22 = new javax.swing.JLabel();
-        p1Letter23 = new javax.swing.JLabel();
-        p1Letter24 = new javax.swing.JLabel();
-        p1Letter25 = new javax.swing.JLabel();
-        p1Letter26 = new javax.swing.JLabel();
-        p1Letter27 = new javax.swing.JLabel();
-        p1Letter28 = new javax.swing.JLabel();
-        p1Letter29 = new javax.swing.JLabel();
-        p1Letter30 = new javax.swing.JLabel();
-        p1Letter31 = new javax.swing.JLabel();
-        p1Letter32 = new javax.swing.JLabel();
-        p1Letter33 = new javax.swing.JLabel();
+        p1Letter1 = new javax.swing.JLabel();
         btnP2_8C = new javax.swing.JButton();
         btnP2_4V = new javax.swing.JButton();
         btnP2_4C = new javax.swing.JButton();
@@ -135,21 +133,21 @@ public class MainFrame extends javax.swing.JFrame {
         btnP2_10C = new javax.swing.JButton();
         btnP2_11V = new javax.swing.JButton();
         btnP2_11C = new javax.swing.JButton();
-        p1Letter34 = new javax.swing.JLabel();
-        p1Letter37 = new javax.swing.JLabel();
-        lblScoreP2 = new javax.swing.JLabel();
+        p1PlayerName = new javax.swing.JLabel();
+        lblRound = new javax.swing.JLabel();
         p1Letter39 = new javax.swing.JLabel();
         txtFinalWordP2 = new javax.swing.JTextField();
         lblScoreP1 = new javax.swing.JLabel();
-        btnP2_8V1 = new javax.swing.JButton();
+        btnP2_8V = new javax.swing.JButton();
         btnSubmitP2 = new javax.swing.JButton();
-        lblScoreP3 = new javax.swing.JLabel();
-        lblScoreP4 = new javax.swing.JLabel();
-        panelScoreCard = new javax.swing.JPanel();
-        btnNextRound = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableScoreCard = new javax.swing.JTable();
+        lblScoreP2 = new javax.swing.JLabel();
+        btnChance = new javax.swing.JButton();
+        btnWordGenerator = new javax.swing.JButton();
+        p2Player = new javax.swing.JLabel();
+        p2Player1 = new javax.swing.JLabel();
+        lblRound1 = new javax.swing.JLabel();
+        lblRound2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -191,6 +189,12 @@ public class MainFrame extends javax.swing.JFrame {
         btnHighScores.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         panelMain.add(btnHighScores, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 260, 260, 286));
 
+        lblVision.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        lblVision.setForeground(new java.awt.Color(189, 195, 199));
+        lblVision.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVision.setText("Unleash your word skills!");
+        panelMain.add(lblVision, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, 450, 50));
+
         jLabel2.setBackground(new java.awt.Color(52, 73, 94));
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(236, 240, 241));
@@ -208,7 +212,7 @@ public class MainFrame extends javax.swing.JFrame {
         jSeparator2.setForeground(new java.awt.Color(236, 240, 241));
         panelStart.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 240, 370, 20));
 
-        txtPlayerName.setBackground(new java.awt.Color(44, 62, 80));
+        txtPlayerName.setBackground(new java.awt.Color(52, 73, 94));
         txtPlayerName.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtPlayerName.setForeground(new java.awt.Color(236, 240, 241));
         txtPlayerName.setBorder(null);
@@ -219,11 +223,9 @@ public class MainFrame extends javax.swing.JFrame {
         });
         panelStart.add(txtPlayerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 190, 360, 50));
 
-        txtPlayer2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtPlayer2.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtPlayer2.setForeground(new java.awt.Color(236, 240, 241));
-        txtPlayer2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtPlayer2.setText("Player 2");
-        panelStart.add(txtPlayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 510, 420, 30));
+        panelStart.add(txtPlayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 520, 420, 40));
 
         btnPlay.setBackground(new java.awt.Color(236, 240, 241));
         btnPlay.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
@@ -234,7 +236,7 @@ public class MainFrame extends javax.swing.JFrame {
                 btnPlayActionPerformed(evt);
             }
         });
-        panelStart.add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 600, 190, 40));
+        panelStart.add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 590, 190, 40));
 
         jLabel3.setBackground(new java.awt.Color(52, 73, 94));
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 48)); // NOI18N
@@ -250,13 +252,13 @@ public class MainFrame extends javax.swing.JFrame {
         btnJoin.setBackground(new java.awt.Color(236, 240, 241));
         btnJoin.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         btnJoin.setForeground(new java.awt.Color(44, 62, 80));
-        btnJoin.setText("Join");
+        btnJoin.setText("Join In");
         btnJoin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnJoinActionPerformed(evt);
             }
         });
-        panelStart.add(btnJoin, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 290, 130, 30));
+        panelStart.add(btnJoin, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 300, 180, 40));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(236, 240, 241));
@@ -268,466 +270,35 @@ public class MainFrame extends javax.swing.JFrame {
         txtPlayersConnected.setForeground(new java.awt.Color(236, 240, 241));
         txtPlayersConnected.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtPlayersConnected.setText("Number of players connected - 0");
-        panelStart.add(txtPlayersConnected, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 410, 420, 50));
+        panelStart.add(txtPlayersConnected, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 400, 420, 50));
 
-        txtPlayer1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtPlayer1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtPlayer1.setForeground(new java.awt.Color(236, 240, 241));
-        txtPlayer1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtPlayer1.setText("Player 1");
-        panelStart.add(txtPlayer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 470, 420, 30));
+        panelStart.add(txtPlayer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 480, 420, 40));
+
+        txtInfo.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtInfo.setForeground(new java.awt.Color(236, 240, 241));
+        panelStart.add(txtInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 660, 630, 30));
+
+        lblRound3.setBackground(new java.awt.Color(52, 73, 94));
+        lblRound3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblRound3.setForeground(new java.awt.Color(236, 240, 241));
+        lblRound3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRound3.setToolTipText("");
+        lblRound3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(52, 73, 94), 3, true));
+        lblRound3.setOpaque(true);
+        panelStart.add(lblRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 380, 600, 270));
+
+        lblRound4.setBackground(new java.awt.Color(52, 73, 94));
+        lblRound4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblRound4.setForeground(new java.awt.Color(236, 240, 241));
+        lblRound4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRound4.setToolTipText("");
+        lblRound4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(52, 73, 94), 3, true));
+        lblRound4.setOpaque(true);
+        panelStart.add(lblRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 180, 600, 180));
 
         panelParent.add(panelStart, "card4");
-
-        panelGame.setMinimumSize(new java.awt.Dimension(1400, 700));
-        panelGame.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelGame.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 350, 1400, 10));
-
-        p2Letter1.setBackground(new java.awt.Color(204, 204, 204));
-        p2Letter1.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p2Letter1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter1.setText("A");
-        p2Letter1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        p2Letter1.setOpaque(true);
-        panelGame.add(p2Letter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 100, 90));
-
-        p2Letter2.setBackground(new java.awt.Color(204, 204, 204));
-        p2Letter2.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p2Letter2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter2.setText("A");
-        p2Letter2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        p2Letter2.setOpaque(true);
-        panelGame.add(p2Letter2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 100, 90));
-
-        p2Letter3.setBackground(new java.awt.Color(204, 204, 204));
-        p2Letter3.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p2Letter3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter3.setText("A");
-        p2Letter3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        p2Letter3.setOpaque(true);
-        panelGame.add(p2Letter3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 460, 100, 90));
-
-        p2Letter4.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p2Letter4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p2Letter4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 460, 100, 90));
-
-        p2Letter5.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p2Letter5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p2Letter5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 460, 100, 90));
-
-        p2Letter6.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p2Letter6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p2Letter6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 460, 100, 90));
-
-        p2Letter7.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p2Letter7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p2Letter7, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 460, 100, 90));
-
-        p2Letter8.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p2Letter8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p2Letter8, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 460, 100, 90));
-
-        p2Letter9.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p2Letter9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p2Letter9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 460, 100, 90));
-
-        p2Letter10.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p2Letter10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p2Letter10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 460, 100, 90));
-
-        p2Letter11.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p2Letter11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p2Letter11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p2Letter11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 460, 100, 90));
-
-        p1Letter1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        p1Letter1.setText("PLAYER 2 : Zacky");
-        panelGame.add(p1Letter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 310, 40));
-
-        p1Letter2.setBackground(new java.awt.Color(204, 204, 204));
-        p1Letter2.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p1Letter2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter2.setText("A");
-        p1Letter2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        p1Letter2.setOpaque(true);
-        panelGame.add(p1Letter2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 90, 90));
-
-        p1Letter3.setBackground(new java.awt.Color(204, 204, 204));
-        p1Letter3.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p1Letter3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter3.setText("A");
-        p1Letter3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        p1Letter3.setOpaque(true);
-        panelGame.add(p1Letter3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 90, 90));
-
-        p1Letter4.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p1Letter4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter4.setText("?");
-        p1Letter4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p1Letter4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 90, 90));
-
-        p1Letter5.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p1Letter5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter5.setText("?");
-        p1Letter5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p1Letter5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, 90, 90));
-
-        p1Letter6.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p1Letter6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter6.setText("?");
-        p1Letter6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p1Letter6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 90, 90));
-
-        p1Letter7.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p1Letter7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter7.setText("?");
-        p1Letter7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p1Letter7, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 100, 90, 90));
-
-        p1Letter8.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p1Letter8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter8.setText("?");
-        p1Letter8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p1Letter8, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 100, 90, 90));
-
-        p1Letter9.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p1Letter9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter9.setText("?");
-        p1Letter9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p1Letter9, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 100, 90, 90));
-
-        p1Letter10.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p1Letter10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter10.setText("?");
-        p1Letter10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p1Letter10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 100, 90, 90));
-
-        p1Letter11.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p1Letter11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter11.setText("?");
-        p1Letter11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(p1Letter11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 100, 90, 90));
-
-        p1Letter12.setBackground(new java.awt.Color(204, 204, 204));
-        p1Letter12.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
-        p1Letter12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter12.setText("A");
-        p1Letter12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        p1Letter12.setOpaque(true);
-        panelGame.add(p1Letter12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 100, 90));
-
-        p1Letter13.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter13.setText("1");
-        panelGame.add(p1Letter13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 40, 30));
-
-        p1Letter14.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter14.setText("2");
-        panelGame.add(p1Letter14, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 40, 30));
-
-        p1Letter15.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter15.setText("3");
-        panelGame.add(p1Letter15, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, 40, 30));
-
-        p1Letter16.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter16.setText("4");
-        panelGame.add(p1Letter16, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 40, 30));
-
-        p1Letter17.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter17.setText("5");
-        panelGame.add(p1Letter17, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, 40, 30));
-
-        p1Letter18.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter18.setText("6");
-        panelGame.add(p1Letter18, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 40, 30));
-
-        p1Letter19.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter19.setText("7");
-        panelGame.add(p1Letter19, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, 40, 30));
-
-        p1Letter20.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter20.setText("1");
-        panelGame.add(p1Letter20, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 40, 30));
-
-        p1Letter21.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter21.setText("2");
-        panelGame.add(p1Letter21, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 40, 30));
-
-        p1Letter22.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter22.setText("3");
-        panelGame.add(p1Letter22, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 420, 40, 30));
-
-        p1Letter23.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter23.setText("4");
-        panelGame.add(p1Letter23, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, 40, 30));
-
-        p1Letter24.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter24.setText("5");
-        panelGame.add(p1Letter24, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, 40, 30));
-
-        p1Letter25.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter25.setText("8");
-        panelGame.add(p1Letter25, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 60, 40, 30));
-
-        p1Letter26.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter26.setText("9");
-        panelGame.add(p1Letter26, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 60, 40, 30));
-
-        p1Letter27.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter27.setText("10");
-        panelGame.add(p1Letter27, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 60, 40, 30));
-
-        p1Letter28.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter28.setText("6");
-        panelGame.add(p1Letter28, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 40, 30));
-
-        p1Letter29.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter29.setText("7");
-        panelGame.add(p1Letter29, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 420, 40, 30));
-
-        p1Letter30.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter30.setText("8");
-        panelGame.add(p1Letter30, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 420, 40, 30));
-
-        p1Letter31.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter31.setText("9");
-        panelGame.add(p1Letter31, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 420, 40, 30));
-
-        p1Letter32.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter32.setText("10");
-        panelGame.add(p1Letter32, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 420, 40, 30));
-
-        p1Letter33.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter33.setText("11");
-        panelGame.add(p1Letter33, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 420, 40, 30));
-
-        btnP2_8C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_8C.setText("Consonant");
-        btnP2_8C.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_8CActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_8C, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, 100, 30));
-
-        btnP2_4V.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_4V.setText("Vowel");
-        btnP2_4V.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_4VActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_4V, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 560, 100, 30));
-
-        btnP2_4C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_4C.setText("Consonant");
-        btnP2_4C.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_4CActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_4C, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 600, 100, 30));
-
-        btnP2_5V.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_5V.setText("Vowel");
-        btnP2_5V.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_5VActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_5V, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 560, 100, 30));
-
-        btnP2_5C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_5C.setText("Consonant");
-        btnP2_5C.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_5CActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_5C, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 600, 100, 30));
-
-        btnP2_6V.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_6V.setText("Vowel");
-        btnP2_6V.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_6VActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_6V, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 560, 100, 30));
-
-        btnP2_6C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_6C.setText("Consonant");
-        btnP2_6C.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_6CActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_6C, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 600, 100, 30));
-
-        btnP2_7V.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_7V.setText("Vowel");
-        btnP2_7V.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_7VActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_7V, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 560, 100, 30));
-
-        btnP2_7C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_7C.setText("Consonant");
-        btnP2_7C.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_7CActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_7C, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 600, 100, 30));
-
-        btnP2_9V.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_9V.setText("Vowel");
-        btnP2_9V.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_9VActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_9V, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 560, 100, 30));
-
-        btnP2_9C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_9C.setText("Consonant");
-        btnP2_9C.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_9CActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_9C, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 600, 100, 30));
-
-        btnP2_10V.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_10V.setText("Vowel");
-        btnP2_10V.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_10VActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_10V, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 560, 100, 30));
-
-        btnP2_10C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_10C.setText("Consonant");
-        btnP2_10C.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_10CActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_10C, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 600, 100, 30));
-
-        btnP2_11V.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_11V.setText("Vowel");
-        btnP2_11V.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_11VActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_11V, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 560, 100, 30));
-
-        btnP2_11C.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_11C.setText("Consonant");
-        btnP2_11C.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_11CActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_11C, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 600, 100, 30));
-
-        p1Letter34.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        p1Letter34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter34.setText("11");
-        panelGame.add(p1Letter34, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 60, 40, 30));
-
-        p1Letter37.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        p1Letter37.setText("PLAYER 1 : Adam");
-        panelGame.add(p1Letter37, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 320, 40));
-
-        lblScoreP2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblScoreP2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblScoreP2.setText("Round : 1/5");
-        lblScoreP2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(lblScoreP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 10, 120, 30));
-
-        p1Letter39.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        p1Letter39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1Letter39.setText("Final Word");
-        panelGame.add(p1Letter39, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 660, 130, 30));
-
-        txtFinalWordP2.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        txtFinalWordP2.setToolTipText("Final Word");
-        txtFinalWordP2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFinalWordP2ActionPerformed(evt);
-            }
-        });
-        panelGame.add(txtFinalWordP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 660, 300, 30));
-
-        lblScoreP1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblScoreP1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblScoreP1.setText("Score : 0");
-        lblScoreP1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(lblScoreP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 10, 110, 30));
-
-        btnP2_8V1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnP2_8V1.setText("Vowel");
-        btnP2_8V1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnP2_8V1ActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnP2_8V1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 560, 100, 30));
-
-        btnSubmitP2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnSubmitP2.setText("Submit");
-        btnSubmitP2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmitP2ActionPerformed(evt);
-            }
-        });
-        panelGame.add(btnSubmitP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 660, 100, 30));
-
-        lblScoreP3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblScoreP3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblScoreP3.setText("Score : 0");
-        lblScoreP3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(lblScoreP3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 360, 110, 30));
-
-        lblScoreP4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblScoreP4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblScoreP4.setText("Round : 1/5");
-        lblScoreP4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelGame.add(lblScoreP4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 360, 120, 30));
-
-        panelParent.add(panelGame, "card2");
 
         panelScoreCard.setBackground(new java.awt.Color(44, 62, 80));
         panelScoreCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -735,13 +306,13 @@ public class MainFrame extends javax.swing.JFrame {
         btnNextRound.setBackground(new java.awt.Color(236, 240, 241));
         btnNextRound.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         btnNextRound.setForeground(new java.awt.Color(44, 62, 80));
-        btnNextRound.setText("Next Round");
+        btnNextRound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Glory_Schema/keyboard-right-arrow-button (1).png"))); // NOI18N
         btnNextRound.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNextRoundActionPerformed(evt);
             }
         });
-        panelScoreCard.add(btnNextRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 650, 170, 40));
+        panelScoreCard.add(btnNextRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 610, 80, 50));
 
         jLabel6.setBackground(new java.awt.Color(52, 73, 94));
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 48)); // NOI18N
@@ -755,6 +326,14 @@ public class MainFrame extends javax.swing.JFrame {
         tableScoreCard.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"hdvdv", null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
@@ -768,9 +347,493 @@ public class MainFrame extends javax.swing.JFrame {
         tableScoreCard.setSelectionForeground(new java.awt.Color(236, 240, 241));
         jScrollPane1.setViewportView(tableScoreCard);
 
-        panelScoreCard.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 940, 360));
+        panelScoreCard.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 940, 330));
+
+        btnExitGame.setBackground(new java.awt.Color(236, 240, 241));
+        btnExitGame.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnExitGame.setForeground(new java.awt.Color(44, 62, 80));
+        btnExitGame.setText("Exit Game");
+        btnExitGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitGameActionPerformed(evt);
+            }
+        });
+        panelScoreCard.add(btnExitGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 620, 170, 40));
+
+        lblScorecardRound.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        lblScorecardRound.setForeground(new java.awt.Color(189, 195, 199));
+        lblScorecardRound.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblScorecardRound.setText("Round");
+        panelScoreCard.add(lblScorecardRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, 450, 40));
+
+        lblScorecardRound1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        lblScorecardRound1.setForeground(new java.awt.Color(236, 240, 241));
+        lblScorecardRound1.setText("Current Scores");
+        panelScoreCard.add(lblScorecardRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 560, 450, 30));
+
+        ScorecardPlayer2Score.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        ScorecardPlayer2Score.setForeground(new java.awt.Color(189, 195, 199));
+        ScorecardPlayer2Score.setText("Player 2-");
+        panelScoreCard.add(ScorecardPlayer2Score, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 660, 400, 30));
+
+        ScorecardPlayer1Score.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        ScorecardPlayer1Score.setForeground(new java.awt.Color(189, 195, 199));
+        ScorecardPlayer1Score.setText("Player 1 -");
+        panelScoreCard.add(ScorecardPlayer1Score, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 610, 410, 30));
+
+        ScorecardPlayer2Score1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        ScorecardPlayer2Score1.setForeground(new java.awt.Color(189, 195, 199));
+        ScorecardPlayer2Score1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScorecardPlayer2Score1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Glory_Schema/user (3).png"))); // NOI18N
+        panelScoreCard.add(ScorecardPlayer2Score1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 650, 60, 50));
+
+        ScorecardPlayer2Score3.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        ScorecardPlayer2Score3.setForeground(new java.awt.Color(189, 195, 199));
+        ScorecardPlayer2Score3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScorecardPlayer2Score3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Glory_Schema/user (3).png"))); // NOI18N
+        panelScoreCard.add(ScorecardPlayer2Score3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 600, 60, 50));
+
+        ScorecardPlayer2Score4.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        ScorecardPlayer2Score4.setForeground(new java.awt.Color(189, 195, 199));
+        ScorecardPlayer2Score4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ScorecardPlayer2Score4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Glory_Schema/scoreboard (2).png"))); // NOI18N
+        panelScoreCard.add(ScorecardPlayer2Score4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 560, 40, 30));
 
         panelParent.add(panelScoreCard, "card5");
+
+        panelGame.setBackground(new java.awt.Color(44, 62, 80));
+        panelGame.setMinimumSize(new java.awt.Dimension(1400, 700));
+        panelGame.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        p2Letter1.setBackground(new java.awt.Color(130, 204, 221));
+        p2Letter1.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p2Letter1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2Letter1.setText("A");
+        p2Letter1.setOpaque(true);
+        panelGame.add(p2Letter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 80, 80));
+
+        p2Letter2.setBackground(new java.awt.Color(130, 204, 221));
+        p2Letter2.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p2Letter2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2Letter2.setText("A");
+        p2Letter2.setOpaque(true);
+        panelGame.add(p2Letter2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, 80, 80));
+
+        p2Letter3.setBackground(new java.awt.Color(130, 204, 221));
+        p2Letter3.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p2Letter3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2Letter3.setText("A");
+        p2Letter3.setOpaque(true);
+        panelGame.add(p2Letter3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 400, 80, 80));
+
+        p2Letter4.setBackground(new java.awt.Color(189, 195, 199));
+        p2Letter4.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p2Letter4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2Letter4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p2Letter4.setOpaque(true);
+        panelGame.add(p2Letter4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, 80, 80));
+
+        p2Letter5.setBackground(new java.awt.Color(189, 195, 199));
+        p2Letter5.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p2Letter5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2Letter5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p2Letter5.setOpaque(true);
+        panelGame.add(p2Letter5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, 80, 80));
+
+        p2Letter6.setBackground(new java.awt.Color(189, 195, 199));
+        p2Letter6.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p2Letter6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2Letter6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p2Letter6.setOpaque(true);
+        panelGame.add(p2Letter6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 400, 80, 80));
+
+        p2Letter7.setBackground(new java.awt.Color(189, 195, 199));
+        p2Letter7.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p2Letter7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2Letter7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p2Letter7.setOpaque(true);
+        panelGame.add(p2Letter7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 400, 80, 80));
+
+        p2Letter8.setBackground(new java.awt.Color(189, 195, 199));
+        p2Letter8.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p2Letter8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2Letter8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p2Letter8.setOpaque(true);
+        panelGame.add(p2Letter8, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 400, 80, 80));
+
+        p2Letter9.setBackground(new java.awt.Color(189, 195, 199));
+        p2Letter9.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p2Letter9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2Letter9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p2Letter9.setOpaque(true);
+        panelGame.add(p2Letter9, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 400, 80, 80));
+
+        p2Letter10.setBackground(new java.awt.Color(189, 195, 199));
+        p2Letter10.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p2Letter10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2Letter10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p2Letter10.setOpaque(true);
+        panelGame.add(p2Letter10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 400, 80, 80));
+
+        p2Letter11.setBackground(new java.awt.Color(189, 195, 199));
+        p2Letter11.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p2Letter11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2Letter11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p2Letter11.setOpaque(true);
+        panelGame.add(p2Letter11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 400, 80, 80));
+
+        p2PlayerName.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        p2PlayerName.setForeground(new java.awt.Color(236, 240, 241));
+        p2PlayerName.setText("PLAYER 2 : Zacky");
+        panelGame.add(p2PlayerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 310, 40));
+
+        p1Letter2.setBackground(new java.awt.Color(130, 204, 221));
+        p1Letter2.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p1Letter2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1Letter2.setText("A");
+        p1Letter2.setOpaque(true);
+        panelGame.add(p1Letter2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 80, 80));
+
+        p1Letter3.setBackground(new java.awt.Color(130, 204, 221));
+        p1Letter3.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p1Letter3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1Letter3.setText("A");
+        p1Letter3.setOpaque(true);
+        panelGame.add(p1Letter3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 80, 80));
+
+        p1Letter4.setBackground(new java.awt.Color(189, 195, 199));
+        p1Letter4.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p1Letter4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1Letter4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Glory_Schema/questions-circular-button.png"))); // NOI18N
+        p1Letter4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p1Letter4.setOpaque(true);
+        panelGame.add(p1Letter4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 80, 80));
+
+        p1Letter5.setBackground(new java.awt.Color(189, 195, 199));
+        p1Letter5.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p1Letter5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1Letter5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Glory_Schema/questions-circular-button.png"))); // NOI18N
+        p1Letter5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p1Letter5.setOpaque(true);
+        panelGame.add(p1Letter5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, 80, 80));
+
+        p1Letter6.setBackground(new java.awt.Color(189, 195, 199));
+        p1Letter6.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p1Letter6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1Letter6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Glory_Schema/questions-circular-button.png"))); // NOI18N
+        p1Letter6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p1Letter6.setOpaque(true);
+        panelGame.add(p1Letter6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 150, 80, 80));
+
+        p1Letter7.setBackground(new java.awt.Color(189, 195, 199));
+        p1Letter7.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p1Letter7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1Letter7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Glory_Schema/questions-circular-button.png"))); // NOI18N
+        p1Letter7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p1Letter7.setOpaque(true);
+        panelGame.add(p1Letter7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 150, 80, 80));
+
+        p1Letter8.setBackground(new java.awt.Color(189, 195, 199));
+        p1Letter8.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p1Letter8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1Letter8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Glory_Schema/questions-circular-button.png"))); // NOI18N
+        p1Letter8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p1Letter8.setOpaque(true);
+        panelGame.add(p1Letter8, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 150, 80, 80));
+
+        p1Letter9.setBackground(new java.awt.Color(189, 195, 199));
+        p1Letter9.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p1Letter9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1Letter9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Glory_Schema/questions-circular-button.png"))); // NOI18N
+        p1Letter9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p1Letter9.setOpaque(true);
+        panelGame.add(p1Letter9, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 150, 80, 80));
+
+        p1Letter10.setBackground(new java.awt.Color(189, 195, 199));
+        p1Letter10.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p1Letter10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1Letter10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Glory_Schema/questions-circular-button.png"))); // NOI18N
+        p1Letter10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p1Letter10.setOpaque(true);
+        panelGame.add(p1Letter10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 150, 80, 80));
+
+        p1Letter11.setBackground(new java.awt.Color(189, 195, 199));
+        p1Letter11.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p1Letter11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1Letter11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Glory_Schema/questions-circular-button.png"))); // NOI18N
+        p1Letter11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(236, 240, 241), 2, true));
+        p1Letter11.setOpaque(true);
+        panelGame.add(p1Letter11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 150, 80, 80));
+
+        p1Letter1.setBackground(new java.awt.Color(130, 204, 221));
+        p1Letter1.setFont(new java.awt.Font("Century Gothic", 0, 50)); // NOI18N
+        p1Letter1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1Letter1.setText("A");
+        p1Letter1.setOpaque(true);
+        panelGame.add(p1Letter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 80, 80));
+
+        btnP2_8C.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_8C.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_8C.setText("C");
+        btnP2_8C.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_8CActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_8C, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 560, 70, 40));
+
+        btnP2_4V.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_4V.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_4V.setText("V");
+        btnP2_4V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_4VActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_4V, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 500, 70, -1));
+
+        btnP2_4C.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_4C.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_4C.setText("C");
+        btnP2_4C.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_4CActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_4C, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 560, 70, 40));
+
+        btnP2_5V.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_5V.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_5V.setText("V");
+        btnP2_5V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_5VActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_5V, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 500, 70, 40));
+
+        btnP2_5C.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_5C.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_5C.setText("C");
+        btnP2_5C.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_5CActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_5C, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 560, 70, 40));
+
+        btnP2_6V.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_6V.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_6V.setText("V");
+        btnP2_6V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_6VActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_6V, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 500, 70, 40));
+
+        btnP2_6C.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_6C.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_6C.setText("C");
+        btnP2_6C.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_6CActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_6C, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 560, 70, 40));
+
+        btnP2_7V.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_7V.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_7V.setText("V");
+        btnP2_7V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_7VActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_7V, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 500, 70, 40));
+
+        btnP2_7C.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_7C.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_7C.setText("C");
+        btnP2_7C.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_7CActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_7C, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 560, 70, 40));
+
+        btnP2_9V.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_9V.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_9V.setText("V");
+        btnP2_9V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_9VActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_9V, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 500, 70, 40));
+
+        btnP2_9C.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_9C.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_9C.setText("C");
+        btnP2_9C.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_9CActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_9C, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 560, 70, 40));
+
+        btnP2_10V.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_10V.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_10V.setText("V");
+        btnP2_10V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_10VActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_10V, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 500, 70, 40));
+
+        btnP2_10C.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_10C.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_10C.setText("C");
+        btnP2_10C.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_10CActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_10C, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 560, 70, 40));
+
+        btnP2_11V.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_11V.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_11V.setText("V");
+        btnP2_11V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_11VActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_11V, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 500, 70, 40));
+
+        btnP2_11C.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_11C.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_11C.setText("C");
+        btnP2_11C.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_11CActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_11C, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 560, 70, 40));
+
+        p1PlayerName.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        p1PlayerName.setForeground(new java.awt.Color(236, 240, 241));
+        p1PlayerName.setText("PLAYER 1 : Adam");
+        panelGame.add(p1PlayerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 320, 40));
+
+        lblRound.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        lblRound.setForeground(new java.awt.Color(236, 240, 241));
+        lblRound.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRound.setText("Round : 1");
+        lblRound.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        panelGame.add(lblRound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 20, 130, 40));
+
+        p1Letter39.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        p1Letter39.setForeground(new java.awt.Color(236, 240, 241));
+        p1Letter39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1Letter39.setText("Final Word");
+        panelGame.add(p1Letter39, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 640, 160, 30));
+
+        txtFinalWordP2.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        txtFinalWordP2.setToolTipText("Final Word");
+        txtFinalWordP2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFinalWordP2ActionPerformed(evt);
+            }
+        });
+        panelGame.add(txtFinalWordP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 640, 310, 30));
+
+        lblScoreP1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblScoreP1.setForeground(new java.awt.Color(236, 240, 241));
+        lblScoreP1.setText("Score : 0");
+        panelGame.add(lblScoreP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 110, 30));
+
+        btnP2_8V.setBackground(new java.awt.Color(236, 240, 241));
+        btnP2_8V.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnP2_8V.setText("V");
+        btnP2_8V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnP2_8VActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnP2_8V, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 500, 70, 40));
+
+        btnSubmitP2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnSubmitP2.setText("Submit");
+        btnSubmitP2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitP2ActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnSubmitP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 640, 100, 30));
+
+        lblScoreP2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblScoreP2.setForeground(new java.awt.Color(236, 240, 241));
+        lblScoreP2.setText("Score : 0");
+        panelGame.add(lblScoreP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 110, 30));
+
+        btnChance.setBackground(new java.awt.Color(204, 204, 204));
+        btnChance.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnChance.setText("Chance");
+        btnChance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChanceActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnChance, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 620, 110, 50));
+
+        btnWordGenerator.setBackground(new java.awt.Color(204, 204, 204));
+        btnWordGenerator.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnWordGenerator.setText("Word Generator");
+        btnWordGenerator.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWordGeneratorActionPerformed(evt);
+            }
+        });
+        panelGame.add(btnWordGenerator, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 620, 140, 50));
+
+        p2Player.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        p2Player.setForeground(new java.awt.Color(236, 240, 241));
+        p2Player.setText("PLAYER 1 - ");
+        panelGame.add(p2Player, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 130, 40));
+
+        p2Player1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        p2Player1.setForeground(new java.awt.Color(236, 240, 241));
+        p2Player1.setText("PLAYER 2 - ");
+        panelGame.add(p2Player1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 130, 40));
+
+        lblRound1.setBackground(new java.awt.Color(52, 73, 94));
+        lblRound1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblRound1.setForeground(new java.awt.Color(236, 240, 241));
+        lblRound1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRound1.setToolTipText("");
+        lblRound1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(52, 73, 94), 3, true));
+        lblRound1.setOpaque(true);
+        panelGame.add(lblRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 350, 110));
+
+        lblRound2.setBackground(new java.awt.Color(52, 73, 94));
+        lblRound2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblRound2.setForeground(new java.awt.Color(236, 240, 241));
+        lblRound2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRound2.setToolTipText("");
+        lblRound2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(52, 73, 94), 3, true));
+        lblRound2.setOpaque(true);
+        panelGame.add(lblRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 350, 110));
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 60)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("43");
+        jLabel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jLabel1.setOpaque(true);
+        panelGame.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 130, 90));
+
+        panelParent.add(panelGame, "card2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -788,43 +851,149 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnP2_8CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_8CActionPerformed
+        VCCount8++;
+        
         char consonant=functionObj.generateConsonant();
         p2Letter8.setText(String.valueOf(consonant));
+        
+        btnP2_8C.setEnabled(false);
+        btnP2_8V.setEnabled(false);
+        btnP2_9V.setEnabled(true);
+        btnP2_9C.setEnabled(true);
+        if(VCCount8==2){
+            disEnableVowelConsonentButtons();
+            Color chanceOff = new Color(255,118,117);
+            btnChance.setBackground(chanceOff);
+        }    
+        
     }//GEN-LAST:event_btnP2_8CActionPerformed
 
     private void btnP2_4CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_4CActionPerformed
+        VCCount4++;
+        
         char consonant=functionObj.generateConsonant();
         p2Letter4.setText(String.valueOf(consonant));
+        
+        btnP2_4C.setEnabled(false);
+        btnP2_4V.setEnabled(false);
+        btnP2_5V.setEnabled(true);
+        btnP2_5C.setEnabled(true);
+        if(VCCount4==2){
+            disEnableVowelConsonentButtons();
+            Color chanceOff = new Color(255,118,117);
+            btnChance.setBackground(chanceOff);
+        }
+        
     }//GEN-LAST:event_btnP2_4CActionPerformed
 
     private void btnP2_5CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_5CActionPerformed
+        VCCount5++;
+        
         char consonant=functionObj.generateConsonant();
         p2Letter5.setText(String.valueOf(consonant));
+        
+        btnP2_5C.setEnabled(false);
+        btnP2_5V.setEnabled(false);
+        btnP2_6V.setEnabled(true);
+        btnP2_6C.setEnabled(true);
+        if(VCCount5==2){
+            disEnableVowelConsonentButtons();
+            Color chanceOff = new Color(255,118,117);
+            btnChance.setBackground(chanceOff);
+        }
+        
     }//GEN-LAST:event_btnP2_5CActionPerformed
 
     private void btnP2_6CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_6CActionPerformed
+        VCCount6++;
+        
         char consonant=functionObj.generateConsonant();
         p2Letter6.setText(String.valueOf(consonant));
+        
+        btnP2_6C.setEnabled(false);
+        btnP2_6V.setEnabled(false);
+        btnP2_7V.setEnabled(true);
+        btnP2_7C.setEnabled(true);
+        if(VCCount6==2){
+            disEnableVowelConsonentButtons();
+            Color chanceOff = new Color(255,118,117);
+            btnChance.setBackground(chanceOff);
+        }
+        
     }//GEN-LAST:event_btnP2_6CActionPerformed
 
     private void btnP2_7CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_7CActionPerformed
+        VCCount7++;
+        
         char consonant=functionObj.generateConsonant();
         p2Letter7.setText(String.valueOf(consonant));
+        
+        btnP2_7C.setEnabled(false);
+        btnP2_7V.setEnabled(false);
+        btnP2_8V.setEnabled(true);
+        btnP2_8C.setEnabled(true);
+        if(VCCount7==2){
+            disEnableVowelConsonentButtons();
+            Color chanceOff = new Color(255,118,117);
+            btnChance.setBackground(chanceOff);
+        }
+        
     }//GEN-LAST:event_btnP2_7CActionPerformed
 
     private void btnP2_9CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_9CActionPerformed
+        VCCount9++;
+        
         char consonant=functionObj.generateConsonant();
         p2Letter9.setText(String.valueOf(consonant));
+        
+        btnP2_9C.setEnabled(false);
+        btnP2_9V.setEnabled(false);
+        btnP2_10V.setEnabled(true);
+        btnP2_10C.setEnabled(true);
+        if(VCCount9==2){
+            disEnableVowelConsonentButtons();
+            Color chanceOff = new Color(255,118,117);
+            btnChance.setBackground(chanceOff);
+        }
+        
     }//GEN-LAST:event_btnP2_9CActionPerformed
 
     private void btnP2_10CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_10CActionPerformed
+        VCCount10++;
+        
         char consonant=functionObj.generateConsonant();
         p2Letter10.setText(String.valueOf(consonant));
+        
+        btnP2_10C.setEnabled(false);
+        btnP2_10V.setEnabled(false);
+        btnP2_11V.setEnabled(true);
+        btnP2_11C.setEnabled(true);
+        if(VCCount10==2){
+            disEnableVowelConsonentButtons();
+            Color chanceOff = new Color(255,118,117);
+            btnChance.setBackground(chanceOff);
+        }
+        
     }//GEN-LAST:event_btnP2_10CActionPerformed
 
     private void btnP2_11CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_11CActionPerformed
+        VCCount11++;
+        
         char consonant=functionObj.generateConsonant();
         p2Letter11.setText(String.valueOf(consonant));
+        
+        btnP2_11C.setEnabled(false);
+        btnP2_11V.setEnabled(false);
+        btnSubmitP2.setEnabled(true);
+        btnChance.setEnabled(true);
+        Color chanceOn = new Color(85,239,196);
+        btnChance.setBackground(chanceOn);
+        if(VCCount11==2){
+            disEnableVowelConsonentButtons();
+            Color chanceOff = new Color(255,118,117);
+            btnChance.setBackground(chanceOff);
+        }
+        
     }//GEN-LAST:event_btnP2_11CActionPerformed
 
     private void txtFinalWordP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFinalWordP2ActionPerformed
@@ -832,65 +1001,172 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFinalWordP2ActionPerformed
 
     private void btnSubmitP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitP2ActionPerformed
-        String UserFinalWord;
+        String UserFinalWord, validityWithDictionary,ValidityWithGivenWords;
         UserFinalWord=txtFinalWordP2.getText();
         
+        //make final word available to all child classes of GloryElement
         GloryElement wordObj = new GloryElement();
         wordObj.setFinalWord(UserFinalWord);
         wordObj.setFinalWordLength();
-        functionObj = new FunctionElement();
-        functionObj.generateScore();
-                
         
-        ServerElement serverObj = new ServerElement(playerName,round, functionObj.rarenessScore, functionObj.rewardScore, functionObj.wordLengthScore, functionObj.finalScore);
+        //check if its a valid word in dictionary
+        Dictionary dObj = new Dictionary(UserFinalWord,"manual");
+        validityWithDictionary= dObj.getValidity();
+         
+        functionObj = new FunctionElement();
+    //check if its made out of the given words
+        generateAllLetters();
+        ValidityWithGivenWords= functionObj.checkValidityWithDisplayedLetters(allLetters);
+        
+        functionObj.generateScore(validityWithDictionary,ValidityWithGivenWords);
+       
+        ServerElement serverObj = new ServerElement(playerName,round, functionObj.rarenessScore, functionObj.rewardScore, functionObj.wordLengthScore, functionObj.RoundScore);
         
         panelParent.removeAll();
         panelParent.add(panelScoreCard);
         panelParent.repaint();
         panelParent.revalidate();
+        
         fillScoreCard();
         
+        if(round==5){
+            btnNextRound.setVisible(false);
+            btnExitGame.setVisible(true);
+        }
         
+         
     }//GEN-LAST:event_btnSubmitP2ActionPerformed
 
     private void btnP2_4VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_4VActionPerformed
+        VCCount4++;
+        
         char vowel=functionObj.generateVowel();
         p2Letter4.setText(String.valueOf(vowel));
+        
+        btnP2_4V.setEnabled(false);
+        btnP2_4C.setEnabled(false);
+        btnP2_5V.setEnabled(true);
+        btnP2_5C.setEnabled(true);
+        if(VCCount4==2){
+            disEnableVowelConsonentButtons();
+            Color chanceOff = new Color(255,118,117);
+            btnChance.setBackground(chanceOff);
+        }
+        
     }//GEN-LAST:event_btnP2_4VActionPerformed
 
     private void btnP2_5VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_5VActionPerformed
+        VCCount5++;
+        
         char vowel=functionObj.generateVowel();
         p2Letter5.setText(String.valueOf(vowel));
+        
+        btnP2_5V.setEnabled(false);
+        btnP2_5C.setEnabled(false);
+        btnP2_6V.setEnabled(true);
+        btnP2_6C.setEnabled(true);
+        if(VCCount5==2){
+            disEnableVowelConsonentButtons();
+            Color chanceOff = new Color(255,118,117);
+            btnChance.setBackground(chanceOff);
+        }
     }//GEN-LAST:event_btnP2_5VActionPerformed
 
     private void btnP2_6VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_6VActionPerformed
+        VCCount6++;
+        
         char vowel=functionObj.generateVowel();
         p2Letter6.setText(String.valueOf(vowel));
+        
+        btnP2_6V.setEnabled(false);
+        btnP2_6C.setEnabled(false);
+        btnP2_7V.setEnabled(true);
+        btnP2_7C.setEnabled(true);
+        if(VCCount6==2){
+            disEnableVowelConsonentButtons();
+        }
     }//GEN-LAST:event_btnP2_6VActionPerformed
 
     private void btnP2_7VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_7VActionPerformed
+        VCCount7++;
+        
         char vowel=functionObj.generateVowel();
         p2Letter7.setText(String.valueOf(vowel));
+        
+        btnP2_7V.setEnabled(false);
+        btnP2_7C.setEnabled(false);
+        btnP2_8V.setEnabled(true);
+        btnP2_8C.setEnabled(true);
+        if(VCCount7==2){
+            disEnableVowelConsonentButtons();
+        }
+        
     }//GEN-LAST:event_btnP2_7VActionPerformed
 
-    private void btnP2_8V1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_8V1ActionPerformed
+    private void btnP2_8VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_8VActionPerformed
+        VCCount8++;
+        
         char vowel=functionObj.generateVowel();
         p2Letter8.setText(String.valueOf(vowel));
-    }//GEN-LAST:event_btnP2_8V1ActionPerformed
+        
+        btnP2_8V.setEnabled(false);
+        btnP2_8C.setEnabled(false);
+        btnP2_9V.setEnabled(true);
+        btnP2_9C.setEnabled(true);
+        if(VCCount8==2){
+            disEnableVowelConsonentButtons();
+        }
+        
+    }//GEN-LAST:event_btnP2_8VActionPerformed
 
     private void btnP2_9VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_9VActionPerformed
+        VCCount9++;
+        
         char vowel=functionObj.generateVowel();
         p2Letter9.setText(String.valueOf(vowel));
+        
+        btnP2_9V.setEnabled(false);
+        btnP2_9C.setEnabled(false);
+        btnP2_10V.setEnabled(true);
+        btnP2_10C.setEnabled(true);
+        if(VCCount9==2){
+            disEnableVowelConsonentButtons();
+        }
+        
     }//GEN-LAST:event_btnP2_9VActionPerformed
 
     private void btnP2_10VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_10VActionPerformed
+        VCCount10++;
+        
         char vowel=functionObj.generateVowel();
         p2Letter10.setText(String.valueOf(vowel));
+        
+        btnP2_10V.setEnabled(false);
+        btnP2_10C.setEnabled(false);
+        btnP2_11V.setEnabled(true);
+        btnP2_11C.setEnabled(true);
+        if(VCCount10==2){
+            disEnableVowelConsonentButtons();
+        }
+        
     }//GEN-LAST:event_btnP2_10VActionPerformed
 
     private void btnP2_11VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnP2_11VActionPerformed
-       char vowel=functionObj.generateVowel();
+        VCCount11++;
+        
+        char vowel=functionObj.generateVowel();
         p2Letter11.setText(String.valueOf(vowel));
+        
+        btnP2_11V.setEnabled(false);
+        btnP2_11C.setEnabled(false);
+        btnSubmitP2.setEnabled(true);
+        btnChance.setEnabled(true);
+        Color chanceOn = new Color(85,239,196);
+        btnChance.setBackground(chanceOn);
+        if(VCCount11==2){
+            disEnableVowelConsonentButtons();
+        }
+        
     }//GEN-LAST:event_btnP2_11VActionPerformed
 
     private void btnPlayNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayNowActionPerformed
@@ -899,13 +1175,13 @@ public class MainFrame extends javax.swing.JFrame {
         panelParent.repaint();
         panelParent.revalidate();
         
-         
-        btnPlay.setEnabled(false);
+        clearStartMenueData();
+        btnPlay.setVisible(false);
     
     }//GEN-LAST:event_btnPlayNowActionPerformed
 
     private void txtPlayerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlayerNameActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtPlayerNameActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
@@ -913,13 +1189,25 @@ public class MainFrame extends javax.swing.JFrame {
         panelParent.add(panelGame);
         panelParent.repaint();
         panelParent.revalidate();
-        
-        
+                
         round=1;
+        generateFirst3Letters();
+        getAndSendInitialLetters();
+        displayOpponentsInitialLetters();
+        
+        disEnableVowelConsonentButtons();
+        btnExitGame.setVisible(false);
+        btnP2_4V.setEnabled(true);
+        btnP2_4C.setEnabled(true);
+        btnSubmitP2.setEnabled(false);
+        btnChance.setEnabled(false);
+        
+        
     }//GEN-LAST:event_btnPlayActionPerformed
     
     public void fillScoreCard(){
         ArrayList<ScoreDetails> container = new ArrayList<ScoreDetails>() ;
+        
         
         ServerElement obj = new ServerElement();
         container=obj.getScoreContainer();
@@ -942,6 +1230,27 @@ public class MainFrame extends javax.swing.JFrame {
             
         model.addRow(row); 
         }
+        
+        int containerSize = container.size();
+        int currentRound = container.get(containerSize-1).getRound();
+        lblScorecardRound.setText("End of round "+String.valueOf(currentRound));
+        
+        String p1=p1PlayerName.getText();
+        String p2=p2PlayerName.getText();
+        int size= container.size();
+        if(container.get(size-1).getPlayerName().equals(p1)){
+            finalScoreP1+=container.get(size-1).getFinalScore();
+            finalScoreP2+=container.get(size-2).getFinalScore();
+        }
+        else if(container.get(size-1).getPlayerName().equals(p2)){
+            finalScoreP2+=container.get(size-1).getFinalScore();
+            finalScoreP1+=container.get(size-2).getFinalScore();
+        }
+        lblScoreP1.setText("Score - "+finalScoreP1);
+        lblScoreP2.setText("Score - "+finalScoreP2);
+        
+        ScorecardPlayer1Score.setText(p1+" - "+finalScoreP1);
+        ScorecardPlayer2Score.setText(p2+" - "+finalScoreP2);
     }
     
     
@@ -958,12 +1267,6 @@ public class MainFrame extends javax.swing.JFrame {
                 output.println(letter2);
                 output.println(letter3);
                 
-                
-                
-              //  String inputValue= input.readLine();
-                
-            
-           
         }
         catch(IOException e){
             e.printStackTrace();
@@ -971,91 +1274,18 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     
-    public void clearNames(){
-        ArrayList<String> nameArray = new ArrayList<String>();
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/glory_game", "root", "");
-            
-            
-            PreparedStatement ps = conn.prepareStatement("SELECT name FROM playernames");
-            ResultSet rs= ps.executeQuery();
-            
-            
-            while(rs.next()){
-                String tempName = rs.getString(1);
-                nameArray.add(tempName);
-            }
-            
-            if(nameArray.size()>1){
-                Statement stmt= conn.createStatement();              
-                stmt.executeUpdate("DELETE FROM playernames");       
-            }
-            
-                 
-            nameArray.clear();
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-
-    }
-    
-    public void passPlayerName(){
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/glory_game", "root", "");
-            
-            
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO playernames (name) Values (?)");
-            ps.setString(1,playerName );
-        
-            int k=ps.executeUpdate();
-            System.out.println("Player name added to database");
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        
-    }
-    
-    public void retreivePlayerNames(){
-        ArrayList<String> nameArray = new ArrayList<String>();
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/glory_game", "root", "");
-            
-            do{
-                PreparedStatement ps = conn.prepareStatement("SELECT name FROM playernames");
-                ResultSet rs= ps.executeQuery();
-            
-                nameArray.clear();
-            while(rs.next()){
-                String tempName = rs.getString(1);
-                nameArray.add(tempName);
-            }
-            
-            }while(nameArray.size()<=1);
-            
-            playerCount=nameArray.size();            
-                       
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        
-    }
     
     
     private void btnJoinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJoinActionPerformed
         playerName=txtPlayerName.getText();
-        playerCount++;
-        clearNames();
-        passPlayerName();
-        retreivePlayerNames();
-        txtPlayersConnected.setText("Number of players connected - "+playerCount);
-        txtPlayer1.setText(playerName);
-        btnPlay.setEnabled(true);
+            
+        NameElements NEObj= new NameElements(playerName);
+        
+        displayPlayersToStartScreen();
+        
+        btnPlay.setVisible(true);
+        btnJoin.setEnabled(false);
+        txtInfo.setText("You will be taken to the game when you and your opponent are ready!");
     }//GEN-LAST:event_btnJoinActionPerformed
 
     private void btnNextRoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextRoundActionPerformed
@@ -1067,9 +1297,45 @@ public class MainFrame extends javax.swing.JFrame {
         panelParent.revalidate();
         
         generateFirst3Letters();
-        clearLetters();
-         
+        getAndSendInitialLetters();
+        displayOpponentsInitialLetters();
+
+        clearOtherLetters();
+        VCCount4=0; VCCount5=0; VCCount6=0; VCCount7=0; VCCount8=0; VCCount9=0; VCCount10=0; VCCount11=0;
+        disEnableVowelConsonentButtons();
+        btnP2_4V.setEnabled(true);
+        btnP2_4C.setEnabled(true);
+        btnSubmitP2.setEnabled(false);
+        btnChance.setEnabled(false);
+        Color chanceDefault = new Color(204,204,204);
+        btnChance.setBackground(chanceDefault);
     }//GEN-LAST:event_btnNextRoundActionPerformed
+
+    private void btnExitGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitGameActionPerformed
+        panelParent.removeAll();
+        panelParent.add(panelMain);
+        panelParent.repaint();
+        panelParent.revalidate();
+        
+        clearStartMenueData();
+    }//GEN-LAST:event_btnExitGameActionPerformed
+
+    private void btnChanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChanceActionPerformed
+        enableVowelConsonentButtons();
+        Color chanceOff = new Color(255,118,117);
+        btnChance.setBackground(chanceOff);
+        btnChance.setEnabled(false);
+    }//GEN-LAST:event_btnChanceActionPerformed
+
+    private void btnWordGeneratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWordGeneratorActionPerformed
+        String word="";
+        generateAllLetters();
+        for(int i=0;i<allLetters.size();i++){
+            word+=allLetters.get(i);
+        }
+        
+        Dictionary dObj = new Dictionary(word,"automatic");
+    }//GEN-LAST:event_btnWordGeneratorActionPerformed
     
     public void generateFirst3Letters(){
         Random random = new Random();
@@ -1087,7 +1353,77 @@ public class MainFrame extends javax.swing.JFrame {
         p2Letter2.setText(String.valueOf(letter2));
         p2Letter3.setText(String.valueOf(letter3));
     }
-    public void clearLetters(){
+    
+    public void generateAllLetters(){  
+        allLetters = new ArrayList<String>();
+        allLetters.clear();
+        
+        allLetters.add(p2Letter1.getText());
+        allLetters.add(p2Letter2.getText());
+        allLetters.add(p2Letter3.getText());
+        allLetters.add(p2Letter4.getText());
+        allLetters.add(p2Letter5.getText());
+        allLetters.add(p2Letter6.getText());
+        allLetters.add(p2Letter7.getText());
+        allLetters.add(p2Letter8.getText());
+        allLetters.add(p2Letter9.getText());
+        allLetters.add(p2Letter10.getText());
+        allLetters.add(p2Letter11.getText());
+        
+        
+        
+        
+    }
+    public void getAndSendInitialLetters(){
+        String letter1=p2Letter1.getText();
+        String letter2=p2Letter2.getText();
+        String letter3=p2Letter3.getText();
+        p2InitialLetters=letter1+letter2+letter3;
+        
+        InitialLetters initialObj = new InitialLetters(p2InitialLetters,round,playerName);
+    }
+    
+    
+    public void displayOpponentsInitialLetters(){
+        ArrayList<InitialLetterDetails> iLContainer = new ArrayList<InitialLetterDetails>();
+        InitialLetters iLObj = new InitialLetters();
+     
+        iLContainer=iLObj.initialLettersContainerClient;
+        
+        int size=iLContainer.size();
+        String iL1=iLContainer.get(size-2).getInitialLetters();
+        String iL2=iLContainer.get(size-1).getInitialLetters();
+        
+        
+        
+        if(p2InitialLetters.equals(iL1)){
+            p1InitialLetters=iL2;
+            String p1=iLContainer.get(size-1).getPlayerName();
+            p1PlayerName.setText(p1);
+            String p2=iLContainer.get(size-2).getPlayerName();
+            p2PlayerName.setText(p2);
+    
+        }
+        if(!p2InitialLetters.equals(iL1)){
+            p1InitialLetters=iL1;
+            String p1=iLContainer.get(size-2).getPlayerName();
+            p1PlayerName.setText(p1);
+            String p2=iLContainer.get(size-1).getPlayerName();
+            p2PlayerName.setText(p2);
+        }
+        char l1=p1InitialLetters.charAt(0);
+        char l2=p1InitialLetters.charAt(1);
+        char l3=p1InitialLetters.charAt(2);
+        
+        p1Letter1.setText(String.valueOf(l1));
+        p1Letter2.setText(String.valueOf(l2));
+        p1Letter3.setText(String.valueOf(l3));
+        String round= "Round "+String.valueOf(iLContainer.get(size-1).getRound());
+        lblRound.setText(round);
+        iLContainer.clear();
+    }
+    
+    public void clearOtherLetters(){
         p2Letter4.setText("");
         p2Letter5.setText("");
         p2Letter6.setText("");
@@ -1097,7 +1433,85 @@ public class MainFrame extends javax.swing.JFrame {
         p2Letter10.setText("");
         p2Letter11.setText("");
         txtFinalWordP2.setText("");
+        
     }
+    
+    public void clearStartMenueData(){
+        txtPlayerName.setText("");
+        txtPlayersConnected.setText("Number of players connected - 0");
+        txtPlayer1.setText("");
+        txtPlayer2.setText("");
+    }
+    
+    public void displayPlayersToStartScreen(){
+        ArrayList<String> container = new ArrayList<String>();
+        NameElements nameObj = new NameElements();
+        container=nameObj.nameContainerClient;
+        
+        playerCount=container.size();
+        String player1 = container.get(0);
+        String player2= container.get(1);
+        
+        txtPlayersConnected.setText("Number of players connected - "+playerCount);
+        txtPlayer1.setText("Player 1 - "+player1);
+        txtPlayer2.setText("Player 2 - "+player2);
+        
+    }
+    
+    public void enableVowelConsonentButtons(){
+        btnP2_4V.setEnabled(true);
+        btnP2_4C.setEnabled(true);
+        
+        btnP2_5V.setEnabled(true);
+        btnP2_5C.setEnabled(true);
+        
+        btnP2_6V.setEnabled(true);
+        btnP2_6C.setEnabled(true);
+        
+        btnP2_7V.setEnabled(true);
+        btnP2_7C.setEnabled(true);
+        
+        btnP2_8V.setEnabled(true);
+        btnP2_8C.setEnabled(true);
+        
+        btnP2_9V.setEnabled(true);
+        btnP2_9C.setEnabled(true);
+        
+        btnP2_10V.setEnabled(true);
+        btnP2_10C.setEnabled(true);
+        
+        btnP2_11V.setEnabled(true);
+        btnP2_11C.setEnabled(true);
+        
+    }
+    
+    public void disEnableVowelConsonentButtons(){
+        btnP2_4V.setEnabled(false);
+        btnP2_4C.setEnabled(false);
+        
+        btnP2_5V.setEnabled(false);
+        btnP2_5C.setEnabled(false);
+        
+        btnP2_6V.setEnabled(false);
+        btnP2_6C.setEnabled(false);
+        
+        btnP2_7V.setEnabled(false);
+        btnP2_7C.setEnabled(false);
+        
+        btnP2_8V.setEnabled(false);
+        btnP2_8C.setEnabled(false);
+        
+        btnP2_9V.setEnabled(false);
+        btnP2_9C.setEnabled(false);
+        
+        btnP2_10V.setEnabled(false);
+        btnP2_10C.setEnabled(false);
+        
+        btnP2_11V.setEnabled(false);
+        btnP2_11C.setEnabled(false);
+        
+    }
+    
     
    
     /**
@@ -1136,6 +1550,13 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ScorecardPlayer1Score;
+    private javax.swing.JLabel ScorecardPlayer2Score;
+    private javax.swing.JLabel ScorecardPlayer2Score1;
+    private javax.swing.JLabel ScorecardPlayer2Score3;
+    private javax.swing.JLabel ScorecardPlayer2Score4;
+    private javax.swing.JButton btnChance;
+    private javax.swing.JButton btnExitGame;
     private javax.swing.JButton btnHighScores;
     private javax.swing.JButton btnHowToPlay;
     private javax.swing.JButton btnJoin;
@@ -1153,53 +1574,36 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnP2_7C;
     private javax.swing.JButton btnP2_7V;
     private javax.swing.JButton btnP2_8C;
-    private javax.swing.JButton btnP2_8V1;
+    private javax.swing.JButton btnP2_8V;
     private javax.swing.JButton btnP2_9C;
     private javax.swing.JButton btnP2_9V;
     private javax.swing.JButton btnPlay;
     private javax.swing.JButton btnPlayNow;
     private javax.swing.JButton btnSubmitP2;
+    private javax.swing.JButton btnWordGenerator;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblRound;
+    private javax.swing.JLabel lblRound1;
+    private javax.swing.JLabel lblRound2;
+    private javax.swing.JLabel lblRound3;
+    private javax.swing.JLabel lblRound4;
     private javax.swing.JLabel lblScoreP1;
     private javax.swing.JLabel lblScoreP2;
-    private javax.swing.JLabel lblScoreP3;
-    private javax.swing.JLabel lblScoreP4;
+    private javax.swing.JLabel lblScorecardRound;
+    private javax.swing.JLabel lblScorecardRound1;
+    private javax.swing.JLabel lblVision;
     private javax.swing.JLabel p1Letter1;
     private javax.swing.JLabel p1Letter10;
     private javax.swing.JLabel p1Letter11;
-    private javax.swing.JLabel p1Letter12;
-    private javax.swing.JLabel p1Letter13;
-    private javax.swing.JLabel p1Letter14;
-    private javax.swing.JLabel p1Letter15;
-    private javax.swing.JLabel p1Letter16;
-    private javax.swing.JLabel p1Letter17;
-    private javax.swing.JLabel p1Letter18;
-    private javax.swing.JLabel p1Letter19;
     private javax.swing.JLabel p1Letter2;
-    private javax.swing.JLabel p1Letter20;
-    private javax.swing.JLabel p1Letter21;
-    private javax.swing.JLabel p1Letter22;
-    private javax.swing.JLabel p1Letter23;
-    private javax.swing.JLabel p1Letter24;
-    private javax.swing.JLabel p1Letter25;
-    private javax.swing.JLabel p1Letter26;
-    private javax.swing.JLabel p1Letter27;
-    private javax.swing.JLabel p1Letter28;
-    private javax.swing.JLabel p1Letter29;
     private javax.swing.JLabel p1Letter3;
-    private javax.swing.JLabel p1Letter30;
-    private javax.swing.JLabel p1Letter31;
-    private javax.swing.JLabel p1Letter32;
-    private javax.swing.JLabel p1Letter33;
-    private javax.swing.JLabel p1Letter34;
-    private javax.swing.JLabel p1Letter37;
     private javax.swing.JLabel p1Letter39;
     private javax.swing.JLabel p1Letter4;
     private javax.swing.JLabel p1Letter5;
@@ -1207,6 +1611,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel p1Letter7;
     private javax.swing.JLabel p1Letter8;
     private javax.swing.JLabel p1Letter9;
+    private javax.swing.JLabel p1PlayerName;
     private javax.swing.JLabel p2Letter1;
     private javax.swing.JLabel p2Letter10;
     private javax.swing.JLabel p2Letter11;
@@ -1218,6 +1623,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel p2Letter7;
     private javax.swing.JLabel p2Letter8;
     private javax.swing.JLabel p2Letter9;
+    private javax.swing.JLabel p2Player;
+    private javax.swing.JLabel p2Player1;
+    private javax.swing.JLabel p2PlayerName;
     private javax.swing.JPanel panelGame;
     private javax.swing.JPanel panelMain;
     private javax.swing.JPanel panelParent;
@@ -1225,6 +1633,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panelStart;
     private javax.swing.JTable tableScoreCard;
     private javax.swing.JTextField txtFinalWordP2;
+    private javax.swing.JLabel txtInfo;
     private javax.swing.JLabel txtPlayer1;
     private javax.swing.JLabel txtPlayer2;
     private javax.swing.JTextField txtPlayerName;
