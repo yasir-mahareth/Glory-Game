@@ -26,14 +26,15 @@ public class FunctionElement extends GloryElement{
     
 // generate Score  
     public void generateScore(String validityDictionary, String validityGivenWords){
-        rarenessValueBank();
-        splitWord(getFinalWord());
-        System.out.println(getFinalWord());
+        
         
         key1= validityDictionary;
         key2=validityGivenWords;
         
         if(key1.equals("valid") && key2.equals("valid")){
+            rarenessValueBank();
+            splitWord(getFinalWord());
+            System.out.println(getFinalWord());
             rarenessScore = getRarenessScore(getFinalWord()); 
      
             RewardElement rewardObject= new RewardElement();
@@ -52,15 +53,17 @@ public class FunctionElement extends GloryElement{
         
         setRoundScore(rarenessScore+rewardScore+wordLengthScore);
         this.RoundScore=getRoundScore();
-      //  System.out.println("Final Score: "+getFinalScore()+"\n");
+      
     }
     
     
     public String checkValidityWithDisplayedLetters(ArrayList<String> arrayList){
-
-        ArrayList<String> wordLetters= new ArrayList<String>();
+        
+        
+        
+            ArrayList<String> wordLetters= new ArrayList<String>();
         wordLetters.clear();
-    //   displayedLetters=arrayList;
+    
         
         for(int i=0; i<getFinalWordLength(); i++){
             wordLetters.add(i,String.valueOf(getFinalWord().charAt(i)));
@@ -86,6 +89,8 @@ public class FunctionElement extends GloryElement{
             }
             
         }
+        
+        
         System.out.println(validityDL+" with given letters");
         return validityDL;
     }

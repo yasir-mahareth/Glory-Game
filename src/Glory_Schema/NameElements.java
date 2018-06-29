@@ -7,6 +7,7 @@ package Glory_Schema;
 
 import glory.game.server.InitialLetterDetails;
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
@@ -52,7 +53,10 @@ public class NameElements {
             catch (ClassNotFoundException e) {
                     System.out.println("The name elements have not arrived from the server");
                     e.printStackTrace();
-            }    
+            } 
+            catch(EOFException e){
+                System.out.println("Please check the database connection");
+            }
              
           
            

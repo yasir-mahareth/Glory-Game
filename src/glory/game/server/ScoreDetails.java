@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 
 public class ScoreDetails implements Serializable {
-    private String playerName;
+    private String playerName,finalWord;
     private int round;
     private int rarenessScore;
     private int rewardScore;
@@ -19,9 +19,10 @@ public class ScoreDetails implements Serializable {
     private int finalScore;
     
     
-    public ScoreDetails(String name, int round, int rareness, int reward, int word, int finalScore){
+    public ScoreDetails(String name, int round,String finalWord, int rareness, int reward, int word, int finalScore){
         this.playerName=name;
         this.round=round;
+        this.finalWord=finalWord;
         this.rarenessScore=rareness;
         this.rewardScore=reward;
         this.wordLengthScore=word;
@@ -45,6 +46,10 @@ public class ScoreDetails implements Serializable {
         return rewardScore;
     }
 
+    public String getFinalWord() {
+        return finalWord;
+    }
+    
     public int getWordLengthScore() {
         return wordLengthScore;
     }

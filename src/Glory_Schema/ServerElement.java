@@ -36,7 +36,7 @@ public class ServerElement {
         
     }
     
-    public ServerElement(String playerName,int round, int rarenessScore, int rewardScore, int wordLengthScore, int finalScore){
+    public ServerElement(String playerName,int round,String finalWord, int rarenessScore, int rewardScore, int wordLengthScore, int finalScore){
         
         
         try(Socket socket= new Socket("localhost",5000)){
@@ -52,6 +52,7 @@ public class ServerElement {
             
                 output.println(playerName);
                 output.println(round);
+                output.println(finalWord);
                 output.println(rarenessScore);
                 output.println(rewardScore);
                 output.println(wordLengthScore);

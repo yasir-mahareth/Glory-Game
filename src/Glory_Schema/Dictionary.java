@@ -20,6 +20,7 @@ import java.util.Scanner;
 public class Dictionary{
     String finalWord;
     static String validity; 
+    static String generatedWord;
     
     public Dictionary(String word,String key){
         
@@ -31,7 +32,7 @@ public class Dictionary{
         ArrayList<String> dictionary = new ArrayList<String>(75000);//wordlist has max 70000words
 
         try {
-            in = new BufferedReader(new FileReader("C:\\Users\\Yaas\\Desktop\\wordlist.txt"));
+            in = new BufferedReader(new FileReader("wordlist.txt"));
             String str;
             while ((str = in.readLine()) != null) {
                 dictionary.add(str);
@@ -123,16 +124,19 @@ public class Dictionary{
      
        //check whether correct word or existing in the wordlist
      public static void manualSearch(List dictionary, String myString) {
-
-        // ArrayList<String> longestWords = LongestWords(dictionary, myString);
-             boolean returnCondition = correctWord(dictionary, myString);
+            
+            
+               boolean returnCondition = correctWord(dictionary, myString);
              if (returnCondition) {
                  validity="valid";
                  System.out.println("Valid word in Dictionary");
              } else {
                  validity="invalid";
                  System.out.println("incorrect word in Dictionary");
-             }
+             } 
+            
+        // ArrayList<String> longestWords = LongestWords(dictionary, myString);
+             
      }
      
       //printing out all the longest words from auto search
@@ -140,13 +144,18 @@ public class Dictionary{
 
              System.out.println("Possible longest words are");
              ArrayList<String>longestWords=LongestWords(dictionary,myString);
+             int size = longestWords.size();
+             for (int j = 0; j <size ; j++) {
 
-             for (int j = 0; j < longestWords.size(); j++) {
-
-                 System.out.println(longestWords.get(j));
-
+                generatedWord=longestWords.get(size-1);
+                
+                
              }
      }
+
+    public String getGeneratedWord() {
+        return generatedWord;
+    }
 
      
      public String getValidity(){
